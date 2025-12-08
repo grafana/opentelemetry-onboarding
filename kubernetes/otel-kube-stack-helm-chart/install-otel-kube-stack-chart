@@ -1,0 +1,34 @@
+
+source .env
+
+# Validate required files exist
+if [[ ! -f ".env" ]]; then
+    echo "Error: .env file not found in current directory. "
+    exit 1
+fi
+
+# WARNING: dont change "namespace=opentelemetry" and "opentelemetry-stack" release name as they are used in other scripts
+
+echo "Installing OpenTelemetry Kube Stack Helm Chart..."
+
+kubectl create namespace opentelemetry || echo "Namespace opentelemetry already exists, continuing..."
+
+kubectl create secret generic grafana-cloud-auth \
+  --namespace opentelemetry \
+  --from-literal=GRAFANA_CLOUD_INSTANCE_ID="$GRAFANA_CLOUD_INSTANCE_ID" \
+  --from-literal=GRAFANA_CLOUD_OTLP_ENDPOINT="$GRAFANA_CLOUD_OTLP_ENDPOINT" \
+  --from-literal=GRAFANA_CLOUD_API_KEY="$GRAFANA_CLOUD_API_KEY"
+
+helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+helm repo update
+
+helm upgrade --install \
+    opentelemetry-stack \
+    opentelemetry/opentelemetry-kube-stack \
+    -f values.yaml \
+    --namespace opentelemetry
+
+echo ""
+echo "OpenTelemetry Kube Stack Helm Chart installation completed successfully!"
+echo "Send OTLP to http://opentelemetry-stack-daemon-collector.opentelemetry.svc.cluster.local:4318 (http/protobuff)"
+echo "Or annotate your pods with: 'instrumentation.opentelemetry.io/inject-<<language>>: opentelemetry/grafana-instrumentation' to auto-instrument them."

@@ -1,0 +1,135 @@
+# https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
+
+clusterName: my-k8s-cluster # TODO variabilize
+crds:
+  installOtel: true
+  installPrometheus: true
+collectors:
+  daemon:
+    enabled: true
+    env:
+      - name: GRAFANA_CLOUD_INSTANCE_ID
+        valueFrom:
+          secretKeyRef:
+            name: grafana-cloud-auth
+            key: GRAFANA_CLOUD_INSTANCE_ID
+      - name: GRAFANA_CLOUD_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: grafana-cloud-auth
+            key: GRAFANA_CLOUD_API_KEY
+      - name: GRAFANA_CLOUD_OTLP_ENDPOINT
+        valueFrom:
+          secretKeyRef:
+            name: grafana-cloud-auth
+            key: GRAFANA_CLOUD_OTLP_ENDPOINT
+    # disable Prometheus scrapping as it assumes the Prometheus Node Exporter and CAdvisor are setup
+    scrape_configs_file: ""
+    presets:
+      logsCollection:
+        enabled: true
+        storeCheckpoints: true
+      hostMetrics:
+        enabled: true
+      kubeletMetrics:
+        enabled: true
+      kubernetesAttributes:
+        enabled: true
+      kubernetesEvents:
+        enabled: true
+      clusterMetrics:
+        enabled: true
+      # annotationDiscovery:
+      # TODO enable once https://github.com/open-telemetry/opentelemetry-helm-charts/pull/1961 is merged
+      #   enabled: true
+    config:
+      extensions:
+        basicauth/grafana_cloud:
+          client_auth:
+            username: "${env:GRAFANA_CLOUD_INSTANCE_ID}"
+            password: "${env:GRAFANA_CLOUD_API_KEY}"
+        k8s_observer:
+          observe_nodes: true
+          observe_services: true
+          observe_ingresses: true
+      exporters:
+        otlphttp:
+          endpoint: "${env:GRAFANA_CLOUD_OTLP_ENDPOINT}"
+          auth:
+            authenticator: basicauth/grafana_cloud
+      service:
+        extensions: [basicauth/grafana_cloud]
+        pipelines:
+          traces:
+            exporters:
+              - otlphttp
+          metrics:
+            exporters:
+              - otlphttp
+          logs:
+            exporters:
+              - otlphttp
+        telemetry:
+          metrics:
+            readers:
+              - pull:
+                  exporter:
+                    prometheus:
+                      host: '0.0.0.0'
+                      port: 8888
+instrumentation:
+  enabled: true
+  name: "grafana-instrumentation"
+  env:
+    - name: OTEL_EXPORTER_OTLP_PROTOCOL
+      value: "grpc"
+    - name: OTEL_K8S_NODE_NAME
+      # todo remove once https://github.com/open-telemetry/opentelemetry-helm-charts/pull/1961 is merged
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+  exporter:
+    endpoint: http://opentelemetry-stack-daemon-collector.opentelemetry.svc.cluster.local:4318
+  resource:
+    resourceAttributes:
+      deployment.environment.name: production # TODO variabilize
+  propagators:
+    - tracecontext
+    - baggage
+  sampler:
+    type: parentbased_always_on
+  java:
+    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:2.22.0
+    env:
+    - name: OTEL_INSTRUMENTATION_LOGBACK_APPENDER_EXPERIMENTAL_CAPTURE_KEY_VALUE_PAIR_ATTRIBUTES
+      value: "true"
+    - name: OTEL_INSTRUMENTATION_LOGBACK_APPENDER_EXPERIMENTAL_LOG_ATTRIBUTES
+      value: "true"
+    - name: OTEL_INSTRUMENTATION_MICROMETER_BASE_TIME_UNIT
+      value: s
+    - name: OTEL_JAVA_EXPERIMENTAL_LOG_ATTRIBUTES_COPY_FROM_BAGGAGE_INCLUDE
+      value: "*"
+    - name: OTEL_JAVA_EXPERIMENTAL_SPAN_ATTRIBUTES_COPY_FROM_BAGGAGE_INCLUDE
+      value: "*"
+    - name: OTEL_SEMCONV_STABILITY_OPT_IN
+      value: "http,database"
+  nodejs:
+    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs:0.67.2
+    env:
+    - name: OTEL_SEMCONV_STABILITY_OPT_IN
+      value: "http,database"
+  dotnet:
+    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-dotnet:1.13.0
+  python:
+    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-python:0.60b0
+opentelemetry-operator:
+  admissionWebhooks:
+    certManager:
+      enabled: false # TODO for production use cert-manager. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement
+    autoGenerateCert:
+      enabled: true # TODO set to true when cert-manager is disabled
+      recreate: true # TODO set to true when autoGenerateCert is enabled to prevent cert trust problems
+defaultCRConfig:
+  enabled: true
+  targetAllocator:
+    enabled: false
