@@ -2,16 +2,16 @@
 set -euo pipefail
 
 echo "Uninstalling OpenTelemetry Kube Stack..."
-helm uninstall opentelemetry-stack --namespace opentelemetry || echo "helm chart opentelemetry-stack not found"
+helm uninstall opentelemetry-stack --namespace opentelemetry-operator-system || echo "helm chart opentelemetry-stack not found"
 
 echo "Removing Grafana Cloud endpoint configuration..."
-kubectl delete secret grafana-cloud-auth --namespace opentelemetry || echo "Grafana Cloud secret not found"
+kubectl delete secret grafana-cloud-auth --namespace opentelemetry-operator-system || echo "Grafana Cloud secret not found"
 
 # Remove OpenTelemetry CRDs (optional - be careful as this affects all OpenTelemetry resources)
 echo "Deleting CRDs..."
-kubectl delete crd opentelemetrycollectors.opentelemetry.io --namespace opentelemetry || echo "CRD opentelemetrycollectors.opentelemetry.io not found"
-kubectl delete crd instrumentations.opentelemetry.io --namespace opentelemetry || echo "CRD instrumentations.opentelemetry.io not found"
-kubectl delete crd opampbridges.opentelemetry.io --namespace opentelemetry || echo "CRD opampbridges.opentelemetry.io not found"
+kubectl delete crd opentelemetrycollectors.opentelemetry.io --namespace opentelemetry-operator-system || echo "CRD opentelemetrycollectors.opentelemetry.io not found"
+kubectl delete crd instrumentations.opentelemetry.io --namespace opentelemetry-operator-system || echo "CRD instrumentations.opentelemetry.io not found"
+kubectl delete crd opampbridges.opentelemetry.io --namespace opentelemetry-operator-system || echo "CRD opampbridges.opentelemetry.io not found"
 
 echo "OpenTelemetry Kube Stack uninstalled successfully!"
 

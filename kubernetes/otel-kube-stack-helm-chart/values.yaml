@@ -89,7 +89,7 @@ instrumentation:
         fieldRef:
           fieldPath: spec.nodeName
   exporter:
-    endpoint: http://opentelemetry-stack-daemon-collector.opentelemetry.svc.cluster.local:4318
+    endpoint: http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318
   resource:
     resourceAttributes:
       deployment.environment.name: production # TODO variabilize
@@ -121,10 +121,10 @@ instrumentation:
 opentelemetry-operator:
   admissionWebhooks:
     certManager:
-      enabled: true # TODO for production use cert-manager. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement
+      enabled: false # TODO variabilize. for production use cert-manager. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement
     autoGenerateCert:
-      enabled: false # TODO set to true when cert-manager is disabled
-      recreate: false # TODO set to true when autoGenerateCert is enabled to prevent cert trust problems
+      enabled: true # TODO set to true when cert-manager is disabled
+      recreate: true # TODO set to true when autoGenerateCert is enabled to prevent cert trust problems
 defaultCRConfig:
   enabled: true
   targetAllocator:

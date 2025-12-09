@@ -7,14 +7,14 @@ if [[ ! -f ".env" ]]; then
     exit 1
 fi
 
-# WARNING: dont change "namespace=opentelemetry" and "opentelemetry-stack" release name as they are used in other scripts
+# WARNING: dont change "namespace=opentelemetry-operator-system" as it is used in the 'instrumentation' CRD defined in values.yaml
 
 echo "Installing OpenTelemetry Kube Stack Helm Chart..."
 
-kubectl create namespace opentelemetry || echo "Namespace opentelemetry already exists, continuing..."
+kubectl create namespace opentelemetry-operator-system || echo "Namespace opentelemetry already exists, continuing..."
 
 kubectl create secret generic grafana-cloud-auth \
-  --namespace opentelemetry \
+  --namespace opentelemetry-operator-system  \
   --from-literal=GRAFANA_CLOUD_INSTANCE_ID="$GRAFANA_CLOUD_INSTANCE_ID" \
   --from-literal=GRAFANA_CLOUD_OTLP_ENDPOINT="$GRAFANA_CLOUD_OTLP_ENDPOINT" \
   --from-literal=GRAFANA_CLOUD_API_KEY="$GRAFANA_CLOUD_API_KEY"
@@ -22,13 +22,14 @@ kubectl create secret generic grafana-cloud-auth \
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo update
 
-helm upgrade --install \
-    opentelemetry-stack \
-    opentelemetry/opentelemetry-kube-stack \
+# TODO shall we specify the version of the opentelemetry-kube-stack chart?
+
+helm upgrade opentelemetry-stack opentelemetry/opentelemetry-kube-stack \
+     --install \
+     --namespace opentelemetry-operator-system \
     -f values.yaml \
-    --namespace opentelemetry
 
 echo ""
 echo "OpenTelemetry Kube Stack Helm Chart installation completed successfully!"
-echo "Send OTLP to 'http://opentelemetry-stack-daemon-collector.opentelemetry.svc.cluster.local:4318' (http/protobuff)"
-echo "Or annotate your pods with: 'instrumentation.opentelemetry.io/inject-<<language>>: opentelemetry/otel-instrumentation' to auto-instrument them."
+echo "Send OTLP to 'http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318' (http/protobuff)"
+echo "Or annotate your pods with: 'instrumentation.opentelemetry.io/inject-<<language>>: opentelemetry-operator-system/otel-instrumentation' to auto-instrument them."
