@@ -14,3 +14,10 @@ kubectl delete crd instrumentations.opentelemetry.io --namespace opentelemetry |
 kubectl delete crd opampbridges.opentelemetry.io --namespace opentelemetry || echo "CRD opampbridges.opentelemetry.io not found"
 
 echo "OpenTelemetry Kube Stack uninstalled successfully!"
+
+echo "Uninstall cert-manager..."
+helm uninstall cert-manager --namespace cert-manager || echo "helm chart cert-manager not found"
+kubectl delete namespace cert-manager || echo "namespace cert-manager not found"
+echo "cert-manager uninstalled successfully!"
+
+

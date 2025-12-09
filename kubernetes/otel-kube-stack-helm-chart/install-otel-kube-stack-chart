@@ -30,5 +30,5 @@ helm upgrade --install \
 
 echo ""
 echo "OpenTelemetry Kube Stack Helm Chart installation completed successfully!"
-echo "Send OTLP to http://opentelemetry-stack-daemon-collector.opentelemetry.svc.cluster.local:4318 (http/protobuff)"
-echo "Or annotate your pods with: 'instrumentation.opentelemetry.io/inject-<<language>>: opentelemetry/grafana-instrumentation' to auto-instrument them."
+echo "Send OTLP to 'http://opentelemetry-stack-daemon-collector.opentelemetry.svc.cluster.local:4318' (http/protobuff)"
+echo "Or annotate your pods with: 'instrumentation.opentelemetry.io/inject-<<language>>: opentelemetry/otel-instrumentation' to auto-instrument them."

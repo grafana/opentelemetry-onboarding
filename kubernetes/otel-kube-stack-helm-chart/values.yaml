@@ -79,10 +79,10 @@ collectors:
                       port: 8888
 instrumentation:
   enabled: true
-  name: "grafana-instrumentation"
+  name: "otel-instrumentation"
   env:
     - name: OTEL_EXPORTER_OTLP_PROTOCOL
-      value: "grpc"
+      value: "http/protobuf"
     - name: OTEL_K8S_NODE_NAME
       # todo remove once https://github.com/open-telemetry/opentelemetry-helm-charts/pull/1961 is merged
       valueFrom:
@@ -107,17 +107,13 @@ instrumentation:
       value: "true"
     - name: OTEL_INSTRUMENTATION_MICROMETER_BASE_TIME_UNIT
       value: s
-    - name: OTEL_JAVA_EXPERIMENTAL_LOG_ATTRIBUTES_COPY_FROM_BAGGAGE_INCLUDE
-      value: "*"
-    - name: OTEL_JAVA_EXPERIMENTAL_SPAN_ATTRIBUTES_COPY_FROM_BAGGAGE_INCLUDE
-      value: "*"
     - name: OTEL_SEMCONV_STABILITY_OPT_IN
       value: "http,database"
   nodejs:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs:0.67.2
     env:
     - name: OTEL_SEMCONV_STABILITY_OPT_IN
-      value: "http,database"
+      value: "http"
   dotnet:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-dotnet:1.13.0
   python:
@@ -125,10 +121,10 @@ instrumentation:
 opentelemetry-operator:
   admissionWebhooks:
     certManager:
-      enabled: false # TODO for production use cert-manager. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement
+      enabled: true # TODO for production use cert-manager. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement
     autoGenerateCert:
-      enabled: true # TODO set to true when cert-manager is disabled
-      recreate: true # TODO set to true when autoGenerateCert is enabled to prevent cert trust problems
+      enabled: false # TODO set to true when cert-manager is disabled
+      recreate: false # TODO set to true when autoGenerateCert is enabled to prevent cert trust problems
 defaultCRConfig:
   enabled: true
   targetAllocator:
