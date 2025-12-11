@@ -39,9 +39,11 @@ collectors:
         enabled: true
       clusterMetrics:
         enabled: true
-      # annotationDiscovery:
-      # TODO enable once https://github.com/open-telemetry/opentelemetry-helm-charts/pull/1961 is merged
-      #   enabled: true
+      annotationDiscovery:
+        logs:
+          enabled: false
+        metrics:
+          enabled: true
     config:
       extensions:
         basicauth/grafana_cloud:
@@ -119,6 +121,9 @@ instrumentation:
   python:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-python:0.60b0
 opentelemetry-operator:
+  manager:
+    collectorImage:
+      repository: otel/opentelemetry-collector-contrib
   admissionWebhooks:
     certManager:
       enabled: false # TODO variabilize. for production use cert-manager. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
 
 source .env
 
@@ -11,13 +13,13 @@ fi
 
 echo "Installing OpenTelemetry Kube Stack Helm Chart..."
 
-kubectl create namespace opentelemetry-operator-system || echo "Namespace opentelemetry already exists, continuing..."
+kubectl create namespace opentelemetry-operator-system || echo "WARNING Namespace 'opentelemetry-operator-system' already exists, continuing..."
 
 kubectl create secret generic grafana-cloud-auth \
   --namespace opentelemetry-operator-system  \
   --from-literal=GRAFANA_CLOUD_INSTANCE_ID="$GRAFANA_CLOUD_INSTANCE_ID" \
   --from-literal=GRAFANA_CLOUD_OTLP_ENDPOINT="$GRAFANA_CLOUD_OTLP_ENDPOINT" \
-  --from-literal=GRAFANA_CLOUD_API_KEY="$GRAFANA_CLOUD_API_KEY"
+  --from-literal=GRAFANA_CLOUD_API_KEY="$GRAFANA_CLOUD_API_KEY" || echo "WARNING Secret 'grafana-cloud-auth' already exists in namespace 'opentelemetry-operator-system', continuing..."
 
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo update
