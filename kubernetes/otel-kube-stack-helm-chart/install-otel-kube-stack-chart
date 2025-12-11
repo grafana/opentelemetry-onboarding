@@ -24,12 +24,18 @@ kubectl create secret generic grafana-cloud-auth \
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo update
 
+# TODO customize these values as needed
+export K8S_CLUSTER_NAME="my_k8s_cluster"
+export DEPLOYMENT_ENVIRONMENT_NAME="staging"
+
 # TODO shall we specify the version of the opentelemetry-kube-stack chart?
 
 helm upgrade opentelemetry-stack opentelemetry/opentelemetry-kube-stack \
-     --install \
-     --namespace opentelemetry-operator-system \
-    -f values.yaml \
+    --install \
+    --namespace opentelemetry-operator-system \
+    --set-string clusterName=$K8S_CLUSTER_NAME \
+    --set-string instrumentation.resource.resourceAttributes.deployment\\.environment\\.name=$DEPLOYMENT_ENVIRONMENT_NAME \
+    -f values.yaml
 
 echo ""
 echo "OpenTelemetry Kube Stack Helm Chart installation completed successfully!"

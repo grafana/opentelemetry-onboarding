@@ -1,6 +1,6 @@
 # https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
 
-clusterName: my-k8s-cluster # TODO variabilize
+clusterName: unknown_k8s_cluster # TODO overwrite this value
 crds:
   installOtel: true
   installPrometheus: true
@@ -94,7 +94,7 @@ instrumentation:
     endpoint: http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318
   resource:
     resourceAttributes:
-      deployment.environment.name: production # TODO variabilize
+      deployment.environment.name: production # TODO customize as needed
   propagators:
     - tracecontext
     - baggage
