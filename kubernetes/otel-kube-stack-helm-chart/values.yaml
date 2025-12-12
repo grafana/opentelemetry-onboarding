@@ -100,6 +100,19 @@ instrumentation:
     - baggage
   sampler:
     type: parentbased_always_on
+  dotnet:
+    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-dotnet:1.13.0
+    env:
+      - name: OTEL_DOTNET_AUTO_LOGS_INSTRUMENTATION_ENABLED
+        value: "true"
+      - name: OTEL_DOTNET_AUTO_TRACES_INSTRUMENTATION_ENABLED
+        value: "true"
+      - name: OTEL_DOTNET_AUTO_METRICS_INSTRUMENTATION_ENABLED
+        value: "true"
+      - name: OTEL_DOTNET_AUTO_LOGS_INCLUDE_FORMATTED_MESSAGE
+        value: "true"
+      - name: OTEL_DOTNET_AUTO_LOGS_CONSOLE_EXPORTER_ENABLED
+        value: "true"
   java:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:2.22.0
     env:
@@ -116,8 +129,6 @@ instrumentation:
     env:
     - name: OTEL_SEMCONV_STABILITY_OPT_IN
       value: "http"
-  dotnet:
-    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-dotnet:1.13.0
   python:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-python:0.60b0
 opentelemetry-operator:
