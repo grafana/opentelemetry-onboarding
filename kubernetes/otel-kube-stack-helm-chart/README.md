@@ -5,6 +5,19 @@
 * Implement K8s monitoring, including the Linux VMs of the Kubernetes nodes : metrics, logs, events
 * Instrument Kubernetes workloads injecting OTel SDK auto-instrumentation (`inject-java`, `inject-dotnet`...) or configuration (`inject-sdk`)
 
+## Getting Started
+
+
+### Enable insrumentation of the workloads
+
+#### Define instrumentation in the K8s deplyoment manifests (recommended)
+
+Add pod annotation to instruct the OpenTlemetry to 
+```
+
+
+
+
 ## Implementation
 
 * Setup the OTel Operator in the K8s namespace `opentelemetry-operator-system`
