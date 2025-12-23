@@ -38,6 +38,8 @@ Resource attributes best practices:
 * `deployment.environment.name`
    * It's valuable to set it in the ingestion pipeline in the collector so the K8s deployment manifest remains unchanged across deployment environments so don't define it as a pod annotation.
 
+⚠️ In the OTel Collector, ensure that all telemetry is enriched by the [OTel Collector K8s Attributes Processor]([url](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor)) with `otel_annotations: true`
+
 ```yaml
 ---
 apiVersion: v1
