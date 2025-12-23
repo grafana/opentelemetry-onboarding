@@ -78,7 +78,9 @@ spec:
               containerPort: 8080
               protocol: TCP
       restartPolicy: Always
-```### Define instrumentation in the K8s deplyoment manifests (recommended)
+```
+
+### Define instrumentation in the K8s deplyoment manifests (recommended)
 
 Add pod annotation to instruct the OpenTlemetry to 
 
