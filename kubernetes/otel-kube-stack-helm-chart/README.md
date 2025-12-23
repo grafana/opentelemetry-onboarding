@@ -29,6 +29,9 @@ Resource attributes best practices:
    * Pod annotation `resource.opentelemetry.io/service.namespace`
       * Why: to not default to `k8s.namespace.name` as it's not intuitive that changing the `k8s.namespace.name` would break alerts...
    * Defaults `k8s.namespace.name`
+* `service.instance.id`:
+   * Let the OTel Operator and OTelCollector generate it not specifying anything
+   * The pod annotation `resource.opentelemetry.io/service.instance.id` is for advanced users
 * `service.version`: decreasing preference
    * Rely on the container image name tag if it's human readable (ie a semantic version)
       * Why: to reduce duplication and version tagging mgmt
