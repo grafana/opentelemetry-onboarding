@@ -1,4 +1,79 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_GRAFANACLOUD-XXX-PROM",
+      "label": "grafanacloud-xxx-prom",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    },
+    {
+      "name": "DS_GRAFANACLOUD-XXX-LOGS",
+      "label": "grafanacloud-xxx-logs",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "loki",
+      "pluginName": "Loki"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "alertlist",
+      "name": "Alert list",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.4.0-20757165945"
+    },
+    {
+      "type": "panel",
+      "id": "logs",
+      "name": "Logs",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "loki",
+      "name": "Loki",
+      "version": "12.4.0-20757165945"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -25,7 +100,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 0,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -135,7 +209,7 @@
           }
         ]
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
@@ -152,7 +226,6 @@
           "refId": "A"
         }
       ],
-      "title": "",
       "transformations": [
         {
           "id": "organize",
@@ -198,10 +271,6 @@
       "type": "table"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 6,
         "w": 6,
@@ -228,15 +297,11 @@
         },
         "viewMode": "list"
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "title": "Alerts",
       "type": "alertlist"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 2,
@@ -253,14 +318,13 @@
         "content": "Receivers",
         "mode": "markdown"
       },
-      "pluginVersion": "12.4.0-20747186544",
-      "title": "",
+      "pluginVersion": "12.4.0-20757165945",
       "type": "text"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -356,12 +420,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "sum(rate(otelcol_receiver_accepted_spans_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))\n+\nsum(rate(otelcol_receiver_refused_spans_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -372,13 +436,13 @@
           "refId": "spans_rate"
         }
       ],
-      "title": "Span Rate",
+      "title": "Spans",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -443,12 +507,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "1\n- \nsum(\n  rate(\n    otelcol_receiver_accepted_spans_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_receiver_accepted_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_refused_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_failed_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -465,7 +529,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "description": "Aggregate ingestion rate across all receivers by telemetry type",
       "fieldConfig": {
@@ -562,12 +626,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "sum(rate(otelcol_receiver_accepted_log_records_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))\n+\nsum(rate(otelcol_receiver_refused_log_records_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -584,7 +648,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -679,12 +743,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "1\n-\nsum(\n  rate(\n    otelcol_receiver_accepted_log_records_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_receiver_accepted_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_refused_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_failed_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -701,7 +765,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "description": "Aggregate ingestion rate across all receivers by telemetry type",
       "fieldConfig": {
@@ -797,12 +861,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "sum(rate(otelcol_receiver_accepted_metric_points_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))\n+\nsum(rate(otelcol_receiver_refused_metric_points_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -819,7 +883,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -914,12 +978,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "1\n-\nsum(\n  rate(\n    otelcol_receiver_accepted_metric_points_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_receiver_accepted_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_refused_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_failed_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -934,10 +998,6 @@
       "type": "gauge"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 2,
@@ -951,17 +1011,747 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "Exporters",
+        "content": "Processors",
         "mode": "markdown"
       },
-      "pluginVersion": "12.4.0-20747186544",
-      "title": "",
+      "pluginVersion": "12.4.0-20757165945",
       "type": "text"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
+      },
+      "description": "Span processors inbound rate, aggregated across all processors",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "traces"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 2,
+        "y": 8
+      },
+      "id": 88,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-20757165945",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"traces\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "queryType": "range",
+          "range": true,
+          "refId": "rate"
+        }
+      ],
+      "title": "Spans",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Drop Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 5,
+        "y": 8
+      },
+      "id": 89,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.4.0-20757165945",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"traces\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"traces\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"traces\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "Drop Rate",
+          "queryType": "range",
+          "range": true,
+          "refId": "drop_rate"
+        }
+      ],
+      "title": "Drop Rate",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "description": "Logs processors inbound rate, aggregated across all processors",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 7,
+        "y": 8
+      },
+      "id": 90,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-20757165945",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"logs\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "queryType": "range",
+          "range": true,
+          "refId": "rate"
+        }
+      ],
+      "title": "Logs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Drop Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 10,
+        "y": 8
+      },
+      "id": 91,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.4.0-20757165945",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"logs\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"logs\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"logs\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "Drop Rate",
+          "queryType": "range",
+          "range": true,
+          "refId": "drop_rate"
+        }
+      ],
+      "title": "Drop Rate",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "description": "Metrics processors inbound rate, aggregated across all processors",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 12,
+        "y": 8
+      },
+      "id": 92,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-20757165945",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"metrics\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "queryType": "range",
+          "range": true,
+          "refId": "rate"
+        }
+      ],
+      "title": "Metrics",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Drop Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 15,
+        "y": 8
+      },
+      "id": 93,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.4.0-20757165945",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"metrics\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"metrics\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"metrics\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "Drop Rate",
+          "queryType": "range",
+          "range": true,
+          "refId": "drop_rate"
+        }
+      ],
+      "title": "Drop Rate",
+      "type": "gauge"
+    },
+    {
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 0,
+        "y": 11
+      },
+      "id": 87,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "Exporters",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.4.0-20757165945",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
       },
       "description": "Aggregated spans export rate across all exporters",
       "fieldConfig": {
@@ -1038,7 +1828,7 @@
         "h": 3,
         "w": 3,
         "x": 2,
-        "y": 8
+        "y": 11
       },
       "id": 74,
       "options": {
@@ -1058,12 +1848,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "sum(rate(otelcol_exporter_sent_spans_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -1080,7 +1870,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1109,43 +1899,13 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Spans"
+              "options": "Span Errors"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
                   "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Logs"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Metrics"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "purple",
                   "mode": "fixed"
                 }
               }
@@ -1157,9 +1917,9 @@
         "h": 3,
         "w": 2,
         "x": 5,
-        "y": 8
+        "y": 11
       },
-      "id": 75,
+      "id": 82,
       "options": {
         "minVizHeight": 75,
         "minVizWidth": 75,
@@ -1175,20 +1935,20 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
-          "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_spans_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
+          "expr": "1\n- \nsum(\n  rate(\n    otelcol_receiver_accepted_spans_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_receiver_accepted_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_refused_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_failed_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
           "instant": false,
-          "legendFormat": "Spans",
+          "legendFormat": "Span Errors",
           "queryType": "range",
           "range": true,
-          "refId": "spans_error"
+          "refId": "span_errors"
         }
       ],
       "title": "Span Errors",
@@ -1197,7 +1957,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "description": "Aggregated logs export rate across all exporters",
       "fieldConfig": {
@@ -1274,7 +2034,7 @@
         "h": 3,
         "w": 3,
         "x": 7,
-        "y": 8
+        "y": 11
       },
       "id": 76,
       "options": {
@@ -1294,12 +2054,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "sum(rate(otelcol_exporter_sent_log_records_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -1316,7 +2076,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1393,7 +2153,7 @@
         "h": 3,
         "w": 2,
         "x": 10,
-        "y": 8
+        "y": 11
       },
       "id": 77,
       "options": {
@@ -1411,12 +2171,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_log_records_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -1427,13 +2187,13 @@
           "refId": "logs_error"
         }
       ],
-      "title": "Losg Errors",
+      "title": "Logs Errors",
       "type": "gauge"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "description": "Aggregate metrics export rate across all exporters",
       "fieldConfig": {
@@ -1509,7 +2269,7 @@
         "h": 3,
         "w": 3,
         "x": 12,
-        "y": 8
+        "y": 11
       },
       "id": 78,
       "options": {
@@ -1529,12 +2289,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "sum(rate(otelcol_exporter_sent_metric_points_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -1551,7 +2311,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "grafanacloud-prom"
+        "uid": "${prometheus_datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1628,7 +2388,7 @@
         "h": 3,
         "w": 2,
         "x": 15,
-        "y": 8
+        "y": 11
       },
       "id": 79,
       "options": {
@@ -1646,12 +2406,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "editorMode": "code",
           "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_metric_points_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -1671,14 +2431,14 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 14
       },
       "id": 53,
       "panels": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "OTel Collectors. Derived from the `otelcol.process.uptime` metric.",
           "fieldConfig": {
@@ -1751,7 +2511,7 @@
             "h": 3,
             "w": 24,
             "x": 0,
-            "y": 13
+            "y": 15
           },
           "id": 54,
           "options": {
@@ -1764,12 +2524,12 @@
               }
             ]
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "otelcol_process_uptime_seconds_total{deployment_environment_name=~\"$deployment_environment_name\", k8s_cluster_name=~\"$k8s_cluster_name\", k8s_node_name=~\"$k8s_node_name\", host_name=~\"$host_name\", service_instance_id=~\"$service_instance_id\", service_name=~\"$service_name\"}",
@@ -1829,7 +2589,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "CPU consumption rate of the OpenTelemetry collector process",
           "fieldConfig": {
@@ -1856,16 +2616,18 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 4,
+            "h": 3,
             "w": 5,
             "x": 0,
-            "y": 26
+            "y": 52
           },
           "id": 50,
           "options": {
-            "minVizHeight": 75,
-            "minVizWidth": 75,
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
             "orientation": "auto",
+            "percentChangeColorMode": "standard",
             "reduceOptions": {
               "calcs": [
                 "lastNotNull"
@@ -1873,16 +2635,16 @@
               "fields": "",
               "values": false
             },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "sizing": "auto"
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "rate(otelcol_process_cpu_seconds_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval])",
@@ -1894,12 +2656,12 @@
             }
           ],
           "title": "CPU Usage",
-          "type": "gauge"
+          "type": "stat"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "Resident memory consumed by the OpenTelemetry collector process",
           "fieldConfig": {
@@ -1927,10 +2689,10 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 4,
+            "h": 3,
             "w": 5,
             "x": 5,
-            "y": 26
+            "y": 52
           },
           "id": 52,
           "options": {
@@ -1950,12 +2712,12 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "otelcol_process_memory_rss_bytes{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}",
@@ -1972,7 +2734,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "Total uptime of the OpenTelemetry collector process",
           "fieldConfig": {
@@ -2003,15 +2765,15 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 4,
-            "w": 11,
+            "h": 3,
+            "w": 2,
             "x": 10,
-            "y": 26
+            "y": 52
           },
           "id": 51,
           "options": {
             "colorMode": "value",
-            "graphMode": "area",
+            "graphMode": "none",
             "justifyMode": "auto",
             "orientation": "auto",
             "percentChangeColorMode": "standard",
@@ -2026,12 +2788,12 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "otelcol_process_uptime_seconds_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}",
@@ -2055,14 +2817,14 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 15
       },
       "id": 23,
       "panels": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -2137,7 +2899,7 @@
             "h": 3,
             "w": 3,
             "x": 0,
-            "y": 12
+            "y": 65
           },
           "id": 39,
           "options": {
@@ -2157,12 +2919,12 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(otelcol_receiver_accepted_spans_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))\n+\nsum(rate(otelcol_receiver_refused_spans_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -2179,7 +2941,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -2226,7 +2988,7 @@
             "h": 3,
             "w": 2,
             "x": 3,
-            "y": 12
+            "y": 65
           },
           "id": 40,
           "options": {
@@ -2244,12 +3006,12 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "1\n- \nsum(\n  rate(\n    otelcol_receiver_accepted_spans_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_receiver_accepted_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_refused_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_failed_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -2266,7 +3028,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "Aggregate ingestion rate across all receivers by telemetry type",
           "fieldConfig": {
@@ -2342,7 +3104,7 @@
             "h": 3,
             "w": 3,
             "x": 5,
-            "y": 12
+            "y": 65
           },
           "id": 59,
           "options": {
@@ -2362,12 +3124,12 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(otelcol_receiver_accepted_log_records_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))\n+\nsum(rate(otelcol_receiver_refused_log_records_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -2384,7 +3146,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -2461,7 +3223,7 @@
             "h": 3,
             "w": 2,
             "x": 8,
-            "y": 12
+            "y": 65
           },
           "id": 61,
           "options": {
@@ -2479,12 +3241,12 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "1\n-\nsum(\n  rate(\n    otelcol_receiver_accepted_log_records_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_receiver_accepted_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_refused_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_failed_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -2501,7 +3263,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "Aggregate ingestion rate across all receivers by telemetry type",
           "fieldConfig": {
@@ -2577,7 +3339,7 @@
             "h": 3,
             "w": 3,
             "x": 10,
-            "y": 12
+            "y": 65
           },
           "id": 60,
           "options": {
@@ -2597,12 +3359,12 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(otelcol_receiver_accepted_metric_points_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))\n+\nsum(rate(otelcol_receiver_refused_metric_points_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -2619,7 +3381,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -2696,7 +3458,7 @@
             "h": 3,
             "w": 2,
             "x": 13,
-            "y": 12
+            "y": 65
           },
           "id": 62,
           "options": {
@@ -2714,12 +3476,12 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "1\n-\nsum(\n  rate(\n    otelcol_receiver_accepted_metric_points_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_receiver_accepted_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_refused_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_receiver_failed_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -2736,7 +3498,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "Detailed breakdown by receiver and telemetry type",
           "fieldConfig": {
@@ -2805,19 +3567,19 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 32
+            "y": 68
           },
           "id": 41,
           "options": {
             "cellHeight": "sm",
             "showHeader": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (signal_type_receiver) (\n  label_join(\n    label_replace(\n      sum by (receiver) (\n        rate(\n          otelcol_receiver_accepted_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_receiver_refused_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"traces\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (receiver) (\n        rate(\n          otelcol_receiver_accepted_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_receiver_refused_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"logs\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (receiver) (\n        rate(\n          otelcol_receiver_accepted_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_receiver_refused_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"metrics\",\n      \"\",\n      \"\"\n    )\n    ,\n    \"signal_type_receiver\",\n    \"-\",\n    \"signal_type\",\n    \"receiver\"\n  )\n)",
@@ -2830,7 +3592,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (signal_type_receiver) (\n  label_join(\n    label_replace(\n      sum by (receiver) (\n        rate(\n          otelcol_receiver_refused_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"traces\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (receiver) (\n        rate(\n          otelcol_receiver_refused_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"logs\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (receiver) (\n        rate(\n          otelcol_receiver_refused_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"metrics\",\n      \"\",\n      \"\"\n    )\n    ,\n    \"signal_type_receiver\",\n    \"-\",\n    \"signal_type\",\n    \"receiver\"\n  )\n)",
@@ -2843,7 +3605,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (signal_type_receiver) (\n  label_join(\n    label_replace(\n      sum by (receiver) (\n        rate(\n          otelcol_receiver_failed_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"traces\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (receiver) (\n        rate(\n          otelcol_receiver_failed_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"logs\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (receiver) (\n        rate(\n          otelcol_receiver_failed_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"metrics\",\n      \"\",\n      \"\"\n    )\n    ,\n    \"signal_type_receiver\",\n    \"-\",\n    \"signal_type\",\n    \"receiver\"\n  )\n)",
@@ -2856,7 +3618,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (signal_type_receiver) (\n  label_join(\n    label_replace(\n      (\n        sum by (receiver) (\n          rate(\n            otelcol_receiver_refused_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_receiver_failed_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n        /\n        sum by (receiver) (\n          rate(\n            otelcol_receiver_accepted_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_receiver_refused_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_receiver_failed_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      ) * 100,\n      \"signal_type\",\n      \"traces\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      (\n        sum by (receiver) (\n          rate(\n            otelcol_receiver_refused_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_receiver_failed_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n        /\n        sum by (receiver) (\n          rate(\n            otelcol_receiver_accepted_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_receiver_refused_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_receiver_failed_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      ) * 100,\n      \"signal_type\",\n      \"logs\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      (\n        sum by (receiver) (\n          rate(\n            otelcol_receiver_refused_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_receiver_failed_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n        /\n        sum by (receiver) (\n          rate(\n            otelcol_receiver_accepted_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_receiver_refused_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_receiver_failed_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      ) * 100,\n      \"signal_type\",\n      \"metrics\",\n      \"\",\n      \"\"\n    )\n    ,\n    \"signal_type_receiver\",\n    \"-\",\n    \"signal_type\",\n    \"receiver\"\n  )\n)",
@@ -2956,14 +3718,725 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 16
       },
       "id": 48,
       "panels": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
+          },
+          "description": "Span processors inbound rate, aggregated across all processors",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 0,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ops"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "traces"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Logs"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Metrics"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 0,
+            "y": 17
+          },
+          "id": 81,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.4.0-20757165945",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${prometheus_datasource}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"traces\"\n    }[$__rate_interval]\n  )\n)",
+              "instant": false,
+              "legendFormat": "__auto",
+              "queryType": "range",
+              "range": true,
+              "refId": "rate"
+            }
+          ],
+          "title": "Spans",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 1,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Drop Rate"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Logs"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Metrics"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 2,
+            "x": 3,
+            "y": 17
+          },
+          "id": 75,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "12.4.0-20757165945",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${prometheus_datasource}"
+              },
+              "editorMode": "code",
+              "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"traces\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"traces\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"traces\"\n    }[$__rate_interval]\n  )\n)",
+              "instant": false,
+              "legendFormat": "Drop Rate",
+              "queryType": "range",
+              "range": true,
+              "refId": "drop_rate"
+            }
+          ],
+          "title": "Drop Rate",
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "description": "Logs processors inbound rate, aggregated across all processors",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 0,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ops"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "logs"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Logs"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Metrics"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 5,
+            "y": 17
+          },
+          "id": 83,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.4.0-20757165945",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${prometheus_datasource}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"logs\"\n    }[$__rate_interval]\n  )\n)",
+              "instant": false,
+              "legendFormat": "__auto",
+              "queryType": "range",
+              "range": true,
+              "refId": "rate"
+            }
+          ],
+          "title": "Logs",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 1,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Drop Rate"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Logs"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Metrics"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 2,
+            "x": 8,
+            "y": 17
+          },
+          "id": 84,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "12.4.0-20757165945",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${prometheus_datasource}"
+              },
+              "editorMode": "code",
+              "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"logs\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"logs\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"logs\"\n    }[$__rate_interval]\n  )\n)",
+              "instant": false,
+              "legendFormat": "Drop Rate",
+              "queryType": "range",
+              "range": true,
+              "refId": "drop_rate"
+            }
+          ],
+          "title": "Drop Rate",
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "description": "Metrics processors inbound rate, aggregated across all processors",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 0,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ops"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "metrics"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Logs"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Metrics"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 10,
+            "y": 17
+          },
+          "id": 85,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.4.0-20757165945",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${prometheus_datasource}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"metrics\"\n    }[$__rate_interval]\n  )\n)",
+              "instant": false,
+              "legendFormat": "__auto",
+              "queryType": "range",
+              "range": true,
+              "refId": "rate"
+            }
+          ],
+          "title": "Metrics",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 1,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Drop Rate"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Logs"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Metrics"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 2,
+            "x": 13,
+            "y": 17
+          },
+          "id": 86,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "12.4.0-20757165945",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${prometheus_datasource}"
+              },
+              "editorMode": "code",
+              "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"metrics\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"metrics\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"metrics\"\n    }[$__rate_interval]\n  )\n)",
+              "instant": false,
+              "legendFormat": "Drop Rate",
+              "queryType": "range",
+              "range": true,
+              "refId": "drop_rate"
+            }
+          ],
+          "title": "Drop Rate",
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -3030,7 +4503,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 31
+            "y": 20
           },
           "id": 49,
           "options": {
@@ -3038,13 +4511,14 @@
             "frameIndex": 0,
             "showHeader": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
+              "editorMode": "code",
               "expr": "sum by (otel_signal_processor)(\n  label_join(\n    (\n      sum by(processor, otel_signal) (\n        rate(otelcol_processor_outgoing_items_total{\n          deployment_environment_name=~\"$deployment_environment_name\",\n          k8s_cluster_name=~\"$k8s_cluster_name\",\n          k8s_node_name=~\"$k8s_node_name\",\n          host_name=~\"$host_name\",\n          service_instance_id=~\"$service_instance_id\",\n          service_name=~\"$service_name\"\n        }[$__rate_interval])\n      )\n      -\n      sum by(processor, otel_signal) (\n        rate(otelcol_processor_incoming_items_total{\n          deployment_environment_name=~\"$deployment_environment_name\",\n          k8s_cluster_name=~\"$k8s_cluster_name\",\n          k8s_node_name=~\"$k8s_node_name\",\n          host_name=~\"$host_name\",\n          service_instance_id=~\"$service_instance_id\",\n          service_name=~\"$service_name\"\n        }[$__rate_interval])\n      )\n    )\n    /\n    sum by(processor, otel_signal) (\n      rate(otelcol_processor_incoming_items_total{\n          deployment_environment_name=~\"$deployment_environment_name\",\n          k8s_cluster_name=~\"$k8s_cluster_name\",\n          k8s_node_name=~\"$k8s_node_name\",\n          host_name=~\"$host_name\",\n          service_instance_id=~\"$service_instance_id\",\n          service_name=~\"$service_name\"\n      }[$__rate_interval])\n    ),\n    \"otel_signal_processor\",\n    \"-\",\n    \"otel_signal\",\n    \"processor\"\n  )\n)",
               "instant": false,
               "queryType": "range",
@@ -3054,8 +4528,9 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
+              "editorMode": "code",
               "expr": "sum by (otel_signal_processor)(\n  label_join(\n    sum by(processor, otel_signal) (\n      rate(otelcol_processor_incoming_items_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval])\n    ),\n    \"otel_signal_processor\",\n    \"-\",\n    \"otel_signal\",\n    \"processor\"\n  )\n)",
               "instant": false,
               "queryType": "range",
@@ -3065,7 +4540,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "expr": "sum by (otel_signal_processor)(\n  label_join(\n    sum by(processor, otel_signal) (\n      rate(otelcol_processor_outgoing_items_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval])\n    ),\n    \"otel_signal_processor\",\n    \"-\",\n    \"otel_signal\",\n    \"processor\"\n  )\n)",
               "instant": false,
@@ -3127,14 +4602,14 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 17
       },
       "id": 47,
       "panels": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "Aggregated spans export rate across all exporters",
           "fieldConfig": {
@@ -3210,7 +4685,7 @@
             "h": 3,
             "w": 3,
             "x": 0,
-            "y": 118
+            "y": 100
           },
           "id": 43,
           "options": {
@@ -3230,12 +4705,12 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(otelcol_exporter_sent_spans_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -3252,7 +4727,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -3329,7 +4804,7 @@
             "h": 3,
             "w": 2,
             "x": 3,
-            "y": 118
+            "y": 100
           },
           "id": 44,
           "options": {
@@ -3347,12 +4822,12 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_spans_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -3369,7 +4844,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "Aggregated logs export rate across all exporters",
           "fieldConfig": {
@@ -3445,7 +4920,7 @@
             "h": 3,
             "w": 3,
             "x": 5,
-            "y": 118
+            "y": 100
           },
           "id": 70,
           "options": {
@@ -3465,12 +4940,12 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(otelcol_exporter_sent_log_records_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -3487,7 +4962,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -3564,7 +5039,7 @@
             "h": 3,
             "w": 2,
             "x": 8,
-            "y": 118
+            "y": 100
           },
           "id": 72,
           "options": {
@@ -3582,12 +5057,12 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_log_records_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -3598,13 +5073,13 @@
               "refId": "logs_error"
             }
           ],
-          "title": "Losg Errors",
+          "title": "Logs Errors",
           "type": "gauge"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "Aggregate metrics export rate across all exporters",
           "fieldConfig": {
@@ -3680,7 +5155,7 @@
             "h": 3,
             "w": 3,
             "x": 10,
-            "y": 118
+            "y": 100
           },
           "id": 71,
           "options": {
@@ -3700,12 +5175,12 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(otelcol_exporter_sent_metric_points_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
@@ -3716,13 +5191,13 @@
               "refId": "C"
             }
           ],
-          "title": "Metrics Rate",
+          "title": "Metrics",
           "type": "stat"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -3799,7 +5274,7 @@
             "h": 3,
             "w": 2,
             "x": 13,
-            "y": 118
+            "y": 100
           },
           "id": 73,
           "options": {
@@ -3817,12 +5292,12 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_metric_points_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
@@ -3839,7 +5314,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafanacloud-prom"
+            "uid": "${prometheus_datasource}"
           },
           "description": "Detailed breakdown by exporter and telemetry type",
           "fieldConfig": {
@@ -3907,19 +5382,19 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 121
+            "y": 113
           },
           "id": 45,
           "options": {
             "cellHeight": "sm",
             "showHeader": true
           },
-          "pluginVersion": "12.4.0-20747186544",
+          "pluginVersion": "12.4.0-20757165945",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (signal_type_exporter) (\n  label_join(\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_sent_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_exporter_send_failed_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"traces\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_sent_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_exporter_send_failed_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"logs\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_sent_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_exporter_send_failed_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"metrics\",\n      \"\",\n      \"\"\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"signal_type\",\n    \"exporter\"\n  )\n)",
@@ -3932,7 +5407,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (signal_type_exporter) (\n  label_join(\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_send_failed_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      )\n      /\n      (\n        sum by (exporter) (\n          rate(\n            otelcol_exporter_sent_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_exporter_send_failed_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      )\n      * 100\n      ,\n      \"signal_type\",\n      \"traces\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_send_failed_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      )\n      /\n      (\n        sum by (exporter) (\n          rate(\n            otelcol_exporter_sent_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_exporter_send_failed_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      )\n      * 100\n      ,\n      \"signal_type\",\n      \"logs\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_send_failed_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      )\n      /\n      (\n        sum by (exporter) (\n          rate(\n            otelcol_exporter_sent_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_exporter_send_failed_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      )\n      * 100\n      ,\n      \"signal_type\",\n      \"metrics\",\n      \"\",\n      \"\"\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"signal_type\",\n    \"exporter\"\n  )\n)",
@@ -3945,7 +5420,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (signal_type_exporter) (\n  label_join(\n    sum by (exporter, data_type) (\n      otelcol_exporter_queue_size{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"data_type\",\n    \"exporter\"\n  )\n)",
@@ -3958,7 +5433,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "grafanacloud-prom"
+                "uid": "${prometheus_datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (signal_type_exporter) (\n  label_join(\n    sum by (exporter, data_type) (\n      otelcol_exporter_queue_size{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }\n      /\n      otelcol_exporter_queue_capacity{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"data_type\",\n    \"exporter\"\n  )\n)",
@@ -4020,7 +5495,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 18
       },
       "id": 46,
       "panels": [],
@@ -4030,18 +5505,14 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "grafanacloud-logs"
+        "uid": "${DS_GRAFANACLOUD-XXX-LOGS}"
       },
       "description": "Logs from OpenTelemetry Collector filtered by dashboard variables",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 19
       },
       "id": 42,
       "options": {
@@ -4058,12 +5529,12 @@
         "sortOrder": "Ascending",
         "wrapLogMessage": false
       },
-      "pluginVersion": "12.4.0-20747186544",
+      "pluginVersion": "12.4.0-20757165945",
       "targets": [
         {
           "datasource": {
             "type": "loki",
-            "uid": "grafanacloud-logs"
+            "uid": "${DS_GRAFANACLOUD-XXX-LOGS}"
           },
           "direction": "backward",
           "editorMode": "code",
@@ -4089,8 +5560,9 @@
     "list": [
       {
         "current": {
-          "text": "grafanacloud-cleclerc-prom",
-          "value": "grafanacloud-prom"
+          "text": "",
+          "value": "${DS_GRAFANACLOUD-XXX-PROM}",
+          "selected": true
         },
         "description": "OpenTelemetry metrics. \nSend metrics using the Prometheus OTLP endpoint activating `keep_identifying_resource_attributes` and resource attribute promotion (aka `promote_resource_attributes`) including `service.name`, service.namespace`, `service.instance.id`, and `deployment.environment.name`",
         "label": "Metrics",
@@ -4103,27 +5575,19 @@
       },
       {
         "allowCustomValue": false,
-        "current": {
-          "text": "grafanacloud-cleclerc-logs",
-          "value": "grafanacloud-logs"
-        },
+        "current": {},
         "description": "OpenTelemetry logs.\n\nSend logs using the Loki OTLP endpoint activating resource attribute promotion (aka `default_resource_attributes_as_index_labels`) including `service.name`, service.namespace`, and `deployment.environment.name`",
         "label": "Logs",
         "name": "loki_datasource",
         "options": [],
         "query": "loki",
         "refresh": 1,
-        "regex": "(?!grafanacloud-cleclerc-alert-state-history|grafanacloud-.*-usage-insights).+",
+        "regex": "(?!grafanacloud-.*-alert-state-history|grafanacloud-.*-usage-insights).+",
         "type": "datasource"
       },
       {
         "allValue": ".*",
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${prometheus_datasource}"
@@ -4155,12 +5619,7 @@
       },
       {
         "allValue": ".*",
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${prometheus_datasource}"
@@ -4191,12 +5650,7 @@
       },
       {
         "allValue": ".*",
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${prometheus_datasource}"
@@ -4227,10 +5681,7 @@
       },
       {
         "allValue": ".*",
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${prometheus_datasource}"
@@ -4259,10 +5710,7 @@
       },
       {
         "allValue": ".*",
-        "current": {
-          "text": "6197e997-7a8b-4e48-bab4-9d1b26d247c0",
-          "value": "6197e997-7a8b-4e48-bab4-9d1b26d247c0"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${prometheus_datasource}"
@@ -4285,10 +5733,7 @@
       },
       {
         "allValue": ".*",
-        "current": {
-          "text": "otelcol-contrib",
-          "value": "otelcol-contrib"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${prometheus_datasource}"
@@ -4296,7 +5741,7 @@
         "definition": "label_values(otelcol_process_uptime_seconds_total{deployment_environment_name=~\"$deployment_environment_name\", k8s_cluster_name=~\"$k8s_cluster_name\", k8s_node_name=~\"$k8s_node_name\", host_name=~\"$host_name\"},service_name)",
         "description": "`service.name`",
         "includeAll": true,
-        "label": "Instance",
+        "label": "Service",
         "name": "service_name",
         "options": [],
         "query": {
@@ -4330,7 +5775,8 @@
   },
   "timezone": "browser",
   "title": "OpenTelemetry Collector",
-  "uid": "otel_demo-otel-collector_dashboard",
-  "version": 3,
-  "weekStart": ""
+  "uid": "otel-collector_dashboard",
+  "version": 14,
+  "weekStart": "",
+  "id": null
 }
