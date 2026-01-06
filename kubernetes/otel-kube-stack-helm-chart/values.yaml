@@ -95,18 +95,28 @@ collectors:
                       headers:
                         - name: "authorization"
                           value: "${env:GRAFANA_CLOUD_BASIC_AUTH_HEADER}"
+          logs:
+            processors:
+              - batch:
+                  exporter:
+                    otlp:
+                      protocol: http/protobuf
+                      endpoint: "${env:GRAFANA_CLOUD_OTLP_ENDPOINT}/v1/logs"
+                      headers:
+                        - name: "authorization"
+                          value: "${env:GRAFANA_CLOUD_BASIC_AUTH_HEADER}"
 
 instrumentation:
   enabled: true
   name: "otel-instrumentation"
   env:
-    - name: OTEL_EXPORTER_OTLP_PROTOCOL
-      value: "http/protobuf"
     - name: OTEL_K8S_NODE_NAME
       # todo remove once https://github.com/open-telemetry/opentelemetry-helm-charts/pull/1961 is merged
       valueFrom:
         fieldRef:
           fieldPath: spec.nodeName
+    - name: OTEL_SEMCONV_STABILITY_OPT_IN
+      value: "http,database"
   exporter:
     endpoint: http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318
   resource:
@@ -126,8 +136,6 @@ instrumentation:
       value: "true"
     - name: OTEL_INSTRUMENTATION_MICROMETER_BASE_TIME_UNIT
       value: s
-    - name: OTEL_SEMCONV_STABILITY_OPT_IN
-      value: "http,database"
   nodejs:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs:0.67.2
     env:
@@ -141,12 +149,15 @@ opentelemetry-operator:
   manager:
     collectorImage:
       repository: otel/opentelemetry-collector-contrib
+    podAnnotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "8080"
   admissionWebhooks:
     certManager:
-      enabled: false # TODO variabilize. for production use cert-manager. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement
+      enabled: false # TODO in production environments, it is strongly recommended to use the cert-manager and overwriting this config to false. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement
     autoGenerateCert:
-      enabled: true # TODO set to true when cert-manager is disabled
-      recreate: true # TODO set to true when autoGenerateCert is enabled to prevent cert trust problems
+      enabled: true # TODO disable when using a cert-manager
+      recreate: true # set to true when autoGenerateCert is enabled to prevent cert trust problems
 defaultCRConfig:
   enabled: true
   targetAllocator:
