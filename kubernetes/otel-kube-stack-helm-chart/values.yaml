@@ -56,6 +56,7 @@ collectors:
     config:
       connectors:
         grafanacloud/connector:
+          host_identifiers: ["host.id", "k8s.node.uid", "k8s.node.name"]
       extensions:
         basicauth/grafana_cloud:
           client_auth:
@@ -134,7 +135,7 @@ instrumentation:
   sampler:
     type: parentbased_always_on
   java:
-    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:2.22.0
+    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:2.24.0
     env:
     - name: OTEL_INSTRUMENTATION_LOGBACK_APPENDER_EXPERIMENTAL_CAPTURE_KEY_VALUE_PAIR_ATTRIBUTES
       value: "true"
@@ -150,7 +151,7 @@ instrumentation:
   dotnet:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-dotnet:1.13.0
   python:
-    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-python:0.60b0
+    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-python:0.60b1
 opentelemetry-operator:
   manager:
     collectorImage:

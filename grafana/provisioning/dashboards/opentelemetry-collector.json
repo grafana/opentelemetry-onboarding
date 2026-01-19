@@ -35,7 +35,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "12.4.0-20757165945"
+      "version": "12.4.0-21125823918"
     },
     {
       "type": "panel",
@@ -47,7 +47,7 @@
       "type": "datasource",
       "id": "loki",
       "name": "Loki",
-      "version": "12.4.0-20757165945"
+      "version": "12.4.0-21125823918"
     },
     {
       "type": "datasource",
@@ -209,7 +209,7 @@
           }
         ]
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -297,7 +297,7 @@
         },
         "viewMode": "list"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "title": "Alerts",
       "type": "alertlist"
     },
@@ -318,7 +318,7 @@
         "content": "Receivers",
         "mode": "markdown"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "type": "text"
     },
     {
@@ -420,7 +420,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -507,7 +507,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -626,7 +626,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -743,7 +743,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -861,7 +861,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -978,7 +978,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -1014,7 +1014,7 @@
         "content": "Processors",
         "mode": "markdown"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "type": "text"
     },
     {
@@ -1117,7 +1117,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -1235,7 +1235,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -1354,7 +1354,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -1472,7 +1472,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -1591,7 +1591,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -1709,7 +1709,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -1745,7 +1745,7 @@
         "content": "Exporters",
         "mode": "markdown"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "type": "text"
     },
     {
@@ -1848,7 +1848,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -1935,7 +1935,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -2054,7 +2054,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -2171,7 +2171,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -2289,7 +2289,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -2406,7 +2406,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
@@ -2524,7 +2524,7 @@
               }
             ]
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -2619,7 +2619,7 @@
             "h": 3,
             "w": 5,
             "x": 0,
-            "y": 52
+            "y": 18
           },
           "id": 50,
           "options": {
@@ -2639,7 +2639,7 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -2692,7 +2692,7 @@
             "h": 3,
             "w": 5,
             "x": 5,
-            "y": 52
+            "y": 18
           },
           "id": 52,
           "options": {
@@ -2712,7 +2712,7 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -2768,7 +2768,7 @@
             "h": 3,
             "w": 2,
             "x": 10,
-            "y": 52
+            "y": 18
           },
           "id": 51,
           "options": {
@@ -2788,7 +2788,7 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -2899,7 +2899,7 @@
             "h": 3,
             "w": 3,
             "x": 0,
-            "y": 65
+            "y": 59
           },
           "id": 39,
           "options": {
@@ -2919,7 +2919,7 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -2988,7 +2988,7 @@
             "h": 3,
             "w": 2,
             "x": 3,
-            "y": 65
+            "y": 59
           },
           "id": 40,
           "options": {
@@ -3006,7 +3006,7 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -3104,7 +3104,7 @@
             "h": 3,
             "w": 3,
             "x": 5,
-            "y": 65
+            "y": 59
           },
           "id": 59,
           "options": {
@@ -3124,7 +3124,7 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -3223,7 +3223,7 @@
             "h": 3,
             "w": 2,
             "x": 8,
-            "y": 65
+            "y": 59
           },
           "id": 61,
           "options": {
@@ -3241,7 +3241,7 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -3339,7 +3339,7 @@
             "h": 3,
             "w": 3,
             "x": 10,
-            "y": 65
+            "y": 59
           },
           "id": 60,
           "options": {
@@ -3359,7 +3359,7 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -3458,7 +3458,7 @@
             "h": 3,
             "w": 2,
             "x": 13,
-            "y": 65
+            "y": 59
           },
           "id": 62,
           "options": {
@@ -3476,7 +3476,7 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -3567,14 +3567,14 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 68
+            "y": 62
           },
           "id": 41,
           "options": {
             "cellHeight": "sm",
             "showHeader": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -3802,7 +3802,7 @@
             "h": 3,
             "w": 3,
             "x": 0,
-            "y": 17
+            "y": 73
           },
           "id": 81,
           "options": {
@@ -3822,7 +3822,7 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -3922,7 +3922,7 @@
             "h": 3,
             "w": 2,
             "x": 3,
-            "y": 17
+            "y": 73
           },
           "id": 75,
           "options": {
@@ -3940,7 +3940,7 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -4039,7 +4039,7 @@
             "h": 3,
             "w": 3,
             "x": 5,
-            "y": 17
+            "y": 73
           },
           "id": 83,
           "options": {
@@ -4059,7 +4059,7 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -4159,7 +4159,7 @@
             "h": 3,
             "w": 2,
             "x": 8,
-            "y": 17
+            "y": 73
           },
           "id": 84,
           "options": {
@@ -4177,7 +4177,7 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -4276,7 +4276,7 @@
             "h": 3,
             "w": 3,
             "x": 10,
-            "y": 17
+            "y": 73
           },
           "id": 85,
           "options": {
@@ -4296,7 +4296,7 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -4396,7 +4396,7 @@
             "h": 3,
             "w": 2,
             "x": 13,
-            "y": 17
+            "y": 73
           },
           "id": 86,
           "options": {
@@ -4414,7 +4414,7 @@
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -4503,7 +4503,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 20
+            "y": 76
           },
           "id": 49,
           "options": {
@@ -4511,7 +4511,7 @@
             "frameIndex": 0,
             "showHeader": true
           },
-          "pluginVersion": "12.4.0-20757165945",
+          "pluginVersion": "12.4.0-21125823918",
           "targets": [
             {
               "datasource": {
@@ -4597,7 +4597,7 @@
       "type": "row"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -4605,889 +4605,888 @@
         "y": 17
       },
       "id": 47,
-      "panels": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
+      "panels": [],
+      "title": "Exporters",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "description": "Aggregated spans export rate across all exporters",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
           },
-          "description": "Aggregated spans export rate across all exporters",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "ops"
-            },
-            "overrides": [
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Spans"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
+                "color": "green",
+                "value": 0
               },
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
+                "color": "red",
+                "value": 80
               }
             ]
           },
-          "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 0,
-            "y": 100
-          },
-          "id": 43,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "12.4.0-20757165945",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum(rate(otelcol_exporter_sent_spans_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
-              "instant": false,
-              "legendFormat": "Spans",
-              "queryType": "range",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Spans",
-          "type": "stat"
+          "unit": "ops"
         },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "max": 1,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spans"
             },
-            "overrides": [
+            "properties": [
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Spans"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 2,
-            "x": 3,
-            "y": 100
-          },
-          "id": 44,
-          "options": {
-            "minVizHeight": 75,
-            "minVizWidth": 75,
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "sizing": "auto"
-          },
-          "pluginVersion": "12.4.0-20757165945",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_spans_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
-              "instant": false,
-              "legendFormat": "Spans",
-              "queryType": "range",
-              "range": true,
-              "refId": "spans_error"
-            }
-          ],
-          "title": "Span Errors",
-          "type": "gauge"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "description": "Aggregated logs export rate across all exporters",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "ops"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Spans"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 5,
-            "y": 100
-          },
-          "id": 70,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "12.4.0-20757165945",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum(rate(otelcol_exporter_sent_log_records_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
-              "instant": false,
-              "legendFormat": "Logs",
-              "queryType": "range",
-              "range": true,
-              "refId": "B"
-            }
-          ],
-          "title": "Logs",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "max": 1,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Spans"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 2,
-            "x": 8,
-            "y": 100
-          },
-          "id": 72,
-          "options": {
-            "minVizHeight": 75,
-            "minVizWidth": 75,
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "sizing": "auto"
-          },
-          "pluginVersion": "12.4.0-20757165945",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_log_records_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
-              "instant": false,
-              "legendFormat": "Logs",
-              "queryType": "range",
-              "range": true,
-              "refId": "logs_error"
-            }
-          ],
-          "title": "Logs Errors",
-          "type": "gauge"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "description": "Aggregate metrics export rate across all exporters",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "ops"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Spans"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 10,
-            "y": 100
-          },
-          "id": 71,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "12.4.0-20757165945",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum(rate(otelcol_exporter_sent_metric_points_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
-              "instant": false,
-              "legendFormat": "Metrics",
-              "queryType": "range",
-              "range": true,
-              "refId": "C"
-            }
-          ],
-          "title": "Metrics",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "max": 1,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Spans"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 2,
-            "x": 13,
-            "y": 100
-          },
-          "id": 73,
-          "options": {
-            "minVizHeight": 75,
-            "minVizWidth": 75,
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "sizing": "auto"
-          },
-          "pluginVersion": "12.4.0-20757165945",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_metric_points_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
-              "instant": false,
-              "legendFormat": "Metrics",
-              "queryType": "range",
-              "range": true,
-              "refId": "metrics_errors"
-            }
-          ],
-          "title": "Metrics Errors",
-          "type": "gauge"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "description": "Detailed breakdown by exporter and telemetry type",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "align": "auto",
-                "cellOptions": {
-                  "type": "auto"
-                },
-                "filterable": false,
-                "footer": {
-                  "reducers": []
-                },
-                "inspect": false
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byRegexp",
-                  "options": ".*Rate.*"
-                },
-                "properties": [
-                  {
-                    "id": "custom.cellOptions",
-                    "value": {
-                      "type": "sparkline"
-                    }
-                  },
-                  {
-                    "id": "unit",
-                    "value": "cps"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byRegexp",
-                  "options": ".*%"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "percentunit"
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 10,
-            "w": 24,
-            "x": 0,
-            "y": 113
-          },
-          "id": 45,
-          "options": {
-            "cellHeight": "sm",
-            "showHeader": true
-          },
-          "pluginVersion": "12.4.0-20757165945",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum by (signal_type_exporter) (\n  label_join(\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_sent_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_exporter_send_failed_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"traces\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_sent_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_exporter_send_failed_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"logs\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_sent_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_exporter_send_failed_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"metrics\",\n      \"\",\n      \"\"\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"signal_type\",\n    \"exporter\"\n  )\n)",
-              "instant": false,
-              "legendFormat": "__auto",
-              "queryType": "range",
-              "range": true,
-              "refId": "rps"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum by (signal_type_exporter) (\n  label_join(\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_send_failed_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      )\n      /\n      (\n        sum by (exporter) (\n          rate(\n            otelcol_exporter_sent_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_exporter_send_failed_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      )\n      * 100\n      ,\n      \"signal_type\",\n      \"traces\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_send_failed_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      )\n      /\n      (\n        sum by (exporter) (\n          rate(\n            otelcol_exporter_sent_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_exporter_send_failed_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      )\n      * 100\n      ,\n      \"signal_type\",\n      \"logs\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_send_failed_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      )\n      /\n      (\n        sum by (exporter) (\n          rate(\n            otelcol_exporter_sent_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_exporter_send_failed_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      )\n      * 100\n      ,\n      \"signal_type\",\n      \"metrics\",\n      \"\",\n      \"\"\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"signal_type\",\n    \"exporter\"\n  )\n)",
-              "instant": false,
-              "legendFormat": "__auto",
-              "queryType": "range",
-              "range": true,
-              "refId": "errors"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum by (signal_type_exporter) (\n  label_join(\n    sum by (exporter, data_type) (\n      otelcol_exporter_queue_size{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"data_type\",\n    \"exporter\"\n  )\n)",
-              "instant": false,
-              "legendFormat": "__auto",
-              "queryType": "range",
-              "range": true,
-              "refId": "queue_size"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum by (signal_type_exporter) (\n  label_join(\n    sum by (exporter, data_type) (\n      otelcol_exporter_queue_size{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }\n      /\n      otelcol_exporter_queue_capacity{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"data_type\",\n    \"exporter\"\n  )\n)",
-              "instant": false,
-              "legendFormat": "__auto",
-              "queryType": "range",
-              "range": true,
-              "refId": "queue_size_pct"
-            }
-          ],
-          "title": "Exporters",
-          "transformations": [
-            {
-              "id": "timeSeriesTable",
-              "options": {
-                "errors": {
-                  "timeField": "Time"
-                },
-                "queue_size": {
-                  "timeField": "Time"
-                },
-                "rps": {
-                  "timeField": "Time"
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
                 }
               }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
             },
-            {
-              "id": "joinByField",
-              "options": {
-                "byField": "signal_type_exporter",
-                "mode": "outer"
-              }
-            },
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {},
-                "includeByName": {},
-                "indexByName": {},
-                "renameByName": {
-                  "Trend #errors": "Errors %",
-                  "Trend #queue_size": "Queue size",
-                  "Trend #queue_size_pct": "Queue saturation %",
-                  "Trend #rps": "Rate",
-                  "signal_type_exporter": "Exporter"
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
                 }
               }
-            }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 0,
+        "y": 18
+      },
+      "id": 43,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
           ],
-          "type": "table"
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(otelcol_exporter_sent_spans_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
+          "instant": false,
+          "legendFormat": "Spans",
+          "queryType": "range",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Spans",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spans"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 3,
+        "y": 18
+      },
+      "id": 44,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_spans_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_spans_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
+          "instant": false,
+          "legendFormat": "Spans",
+          "queryType": "range",
+          "range": true,
+          "refId": "spans_error"
+        }
+      ],
+      "title": "Span Errors",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "description": "Aggregated logs export rate across all exporters",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spans"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 5,
+        "y": 18
+      },
+      "id": 70,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(otelcol_exporter_sent_log_records_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
+          "instant": false,
+          "legendFormat": "Logs",
+          "queryType": "range",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Logs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spans"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 8,
+        "y": 18
+      },
+      "id": 72,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_log_records_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_log_records_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
+          "instant": false,
+          "legendFormat": "Logs",
+          "queryType": "range",
+          "range": true,
+          "refId": "logs_error"
+        }
+      ],
+      "title": "Logs Errors",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "description": "Aggregate metrics export rate across all exporters",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spans"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 10,
+        "y": 18
+      },
+      "id": 71,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(otelcol_exporter_sent_metric_points_total{deployment_environment_name=~\"$deployment_environment_name\",k8s_cluster_name=~\"$k8s_cluster_name\",k8s_node_name=~\"$k8s_node_name\",host_name=~\"$host_name\",service_instance_id=~\"$service_instance_id\",service_name=~\"$service_name\"}[$__rate_interval]))",
+          "instant": false,
+          "legendFormat": "Metrics",
+          "queryType": "range",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Metrics",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spans"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 13,
+        "y": 18
+      },
+      "id": 73,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "1\n-\nsum(\n  rate(\n    otelcol_exporter_sent_metric_points_total{\n      deployment_environment_name=~\"$deployment_environment_name\",\n      k8s_cluster_name=~\"$k8s_cluster_name\",\n      k8s_node_name=~\"$k8s_node_name\",\n      host_name=~\"$host_name\",\n      service_instance_id=~\"$service_instance_id\",\n      service_name=~\"$service_name\"\n    }[$__rate_interval]\n  )\n)\n/\n(\n  sum(\n    rate(\n      otelcol_exporter_sent_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n  +\n  sum(\n    rate(\n      otelcol_exporter_send_failed_metric_points_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval]\n    )\n  )\n)",
+          "instant": false,
+          "legendFormat": "Metrics",
+          "queryType": "range",
+          "range": true,
+          "refId": "metrics_errors"
+        }
+      ],
+      "title": "Metrics Errors",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "description": "Detailed breakdown by exporter and telemetry type",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*Rate.*"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "sparkline"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "cps"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*%"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 45,
+      "options": {
+        "cellHeight": "sm",
+        "showHeader": true
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (signal_type_exporter) (\n  label_join(\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_sent_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_exporter_send_failed_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"traces\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_sent_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_exporter_send_failed_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"logs\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_sent_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n        +\n        rate(\n          otelcol_exporter_send_failed_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      ),\n      \"signal_type\",\n      \"metrics\",\n      \"\",\n      \"\"\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"signal_type\",\n    \"exporter\"\n  )\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "queryType": "range",
+          "range": true,
+          "refId": "rps"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (signal_type_exporter) (\n  label_join(\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_send_failed_spans_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      )\n      /\n      (\n        sum by (exporter) (\n          rate(\n            otelcol_exporter_sent_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_exporter_send_failed_spans_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      )\n      * 100\n      ,\n      \"signal_type\",\n      \"traces\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_send_failed_log_records_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      )\n      /\n      (\n        sum by (exporter) (\n          rate(\n            otelcol_exporter_sent_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_exporter_send_failed_log_records_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      )\n      * 100\n      ,\n      \"signal_type\",\n      \"logs\",\n      \"\",\n      \"\"\n    )\n    or\n    label_replace(\n      sum by (exporter) (\n        rate(\n          otelcol_exporter_send_failed_metric_points_total{\n            deployment_environment_name=~\"$deployment_environment_name\",\n            k8s_cluster_name=~\"$k8s_cluster_name\",\n            k8s_node_name=~\"$k8s_node_name\",\n            host_name=~\"$host_name\",\n            service_instance_id=~\"$service_instance_id\",\n            service_name=~\"$service_name\"\n          }[$__rate_interval]\n        )\n      )\n      /\n      (\n        sum by (exporter) (\n          rate(\n            otelcol_exporter_sent_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n          +\n          rate(\n            otelcol_exporter_send_failed_metric_points_total{\n              deployment_environment_name=~\"$deployment_environment_name\",\n              k8s_cluster_name=~\"$k8s_cluster_name\",\n              k8s_node_name=~\"$k8s_node_name\",\n              host_name=~\"$host_name\",\n              service_instance_id=~\"$service_instance_id\",\n              service_name=~\"$service_name\"\n            }[$__rate_interval]\n          )\n        )\n      )\n      * 100\n      ,\n      \"signal_type\",\n      \"metrics\",\n      \"\",\n      \"\"\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"signal_type\",\n    \"exporter\"\n  )\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "queryType": "range",
+          "range": true,
+          "refId": "errors"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (signal_type_exporter) (\n  label_join(\n    sum by (exporter, data_type) (\n      otelcol_exporter_queue_size{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"data_type\",\n    \"exporter\"\n  )\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "queryType": "range",
+          "range": true,
+          "refId": "queue_size"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (signal_type_exporter) (\n  label_join(\n    sum by (exporter, data_type) (\n      otelcol_exporter_queue_size{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }\n      /\n      otelcol_exporter_queue_capacity{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }\n    )\n    ,\n    \"signal_type_exporter\",\n    \"-\",\n    \"data_type\",\n    \"exporter\"\n  )\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "queryType": "range",
+          "range": true,
+          "refId": "queue_size_pct"
         }
       ],
       "title": "Exporters",
-      "type": "row"
+      "transformations": [
+        {
+          "id": "timeSeriesTable",
+          "options": {
+            "errors": {
+              "timeField": "Time"
+            },
+            "queue_size": {
+              "timeField": "Time"
+            },
+            "rps": {
+              "timeField": "Time"
+            }
+          }
+        },
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "signal_type_exporter",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Trend #errors": "Errors %",
+              "Trend #queue_size": "Queue size",
+              "Trend #queue_size_pct": "Queue saturation %",
+              "Trend #rps": "Rate",
+              "signal_type_exporter": "Exporter"
+            }
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "collapsed": false,
@@ -5495,7 +5494,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 27
       },
       "id": 46,
       "panels": [],
@@ -5505,14 +5504,14 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "${DS_GRAFANACLOUD-XXX-LOGS}"
+        "uid": "${loki_datasource}"
       },
       "description": "Logs from OpenTelemetry Collector filtered by dashboard variables",
       "gridPos": {
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 28
       },
       "id": 42,
       "options": {
@@ -5529,16 +5528,16 @@
         "sortOrder": "Ascending",
         "wrapLogMessage": false
       },
-      "pluginVersion": "12.4.0-20757165945",
+      "pluginVersion": "12.4.0-21125823918",
       "targets": [
         {
           "datasource": {
             "type": "loki",
-            "uid": "${DS_GRAFANACLOUD-XXX-LOGS}"
+            "uid": "${loki_datasource}"
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "{service_name=~\"$service_name\", deployment_environment_name=~\"$deployment_environment_name\", k8s_cluster_name=~\"$k8s_cluster_name\"} | k8s_node_name=~\"$k8s_node_name\", host_name=~\"$host_name\" # omit service.instance.id due to mismatch between metrics and logs",
+          "expr": "{service_name=~\"$service_name\", deployment_environment_name=~\"$deployment_environment_name\", k8s_cluster_name=~\"$k8s_cluster_name\"} | k8s_node_name=~\"$k8s_node_name\", host_name=~\"$host_name\"",
           "instant": false,
           "queryType": "range",
           "range": true,
@@ -5575,7 +5574,11 @@
       },
       {
         "allowCustomValue": false,
-        "current": {},
+        "current": {
+          "text": "",
+          "value": "${DS_GRAFANACLOUD-XXX-LOGS}",
+          "selected": true
+        },
         "description": "OpenTelemetry logs.\n\nSend logs using the Loki OTLP endpoint activating resource attribute promotion (aka `default_resource_attributes_as_index_labels`) including `service.name`, service.namespace`, and `deployment.environment.name`",
         "label": "Logs",
         "name": "loki_datasource",
@@ -5761,6 +5764,7 @@
     "to": "now"
   },
   "timepicker": {
+    "nowDelay": "1m",
     "refresh_intervals": [
       "10s",
       "30s",
@@ -5775,8 +5779,8 @@
   },
   "timezone": "browser",
   "title": "OpenTelemetry Collector",
-  "uid": "otel-collector_dashboard",
-  "version": 14,
+  "uid": "otel-collector_dashboard_prometheus-loki",
+  "version": 20,
   "weekStart": "",
   "id": null
 }
