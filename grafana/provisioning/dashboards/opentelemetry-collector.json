@@ -2619,7 +2619,7 @@
             "h": 3,
             "w": 5,
             "x": 0,
-            "y": 18
+            "y": 29
           },
           "id": 50,
           "options": {
@@ -2692,7 +2692,7 @@
             "h": 3,
             "w": 5,
             "x": 5,
-            "y": 18
+            "y": 29
           },
           "id": 52,
           "options": {
@@ -2768,7 +2768,7 @@
             "h": 3,
             "w": 2,
             "x": 10,
-            "y": 18
+            "y": 29
           },
           "id": 51,
           "options": {
@@ -2899,7 +2899,7 @@
             "h": 3,
             "w": 3,
             "x": 0,
-            "y": 59
+            "y": 70
           },
           "id": 39,
           "options": {
@@ -2988,7 +2988,7 @@
             "h": 3,
             "w": 2,
             "x": 3,
-            "y": 59
+            "y": 70
           },
           "id": 40,
           "options": {
@@ -3104,7 +3104,7 @@
             "h": 3,
             "w": 3,
             "x": 5,
-            "y": 59
+            "y": 70
           },
           "id": 59,
           "options": {
@@ -3223,7 +3223,7 @@
             "h": 3,
             "w": 2,
             "x": 8,
-            "y": 59
+            "y": 70
           },
           "id": 61,
           "options": {
@@ -3339,7 +3339,7 @@
             "h": 3,
             "w": 3,
             "x": 10,
-            "y": 59
+            "y": 70
           },
           "id": 60,
           "options": {
@@ -3458,7 +3458,7 @@
             "h": 3,
             "w": 2,
             "x": 13,
-            "y": 59
+            "y": 70
           },
           "id": 62,
           "options": {
@@ -3567,7 +3567,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 62
+            "y": 73
           },
           "id": 41,
           "options": {
@@ -3713,7 +3713,7 @@
       "type": "row"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3721,880 +3721,879 @@
         "y": 16
       },
       "id": 48,
-      "panels": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
+      "panels": [],
+      "title": "Processors",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "description": "Span processors inbound rate, aggregated across all processors",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
           },
-          "description": "Span processors inbound rate, aggregated across all processors",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "decimals": 0,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "ops"
-            },
-            "overrides": [
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "traces"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
+                "color": "green",
+                "value": 0
               },
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
+                "color": "red",
+                "value": 80
               }
             ]
           },
-          "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 0,
-            "y": 73
-          },
-          "id": 81,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "12.4.0-21125823918",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"traces\"\n    }[$__rate_interval]\n  )\n)",
-              "instant": false,
-              "legendFormat": "__auto",
-              "queryType": "range",
-              "range": true,
-              "refId": "rate"
-            }
-          ],
-          "title": "Spans",
-          "type": "stat"
+          "unit": "ops"
         },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "decimals": 1,
-              "mappings": [],
-              "max": 1,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "traces"
             },
-            "overrides": [
+            "properties": [
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Drop Rate"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 2,
-            "x": 3,
-            "y": 73
-          },
-          "id": 75,
-          "options": {
-            "minVizHeight": 75,
-            "minVizWidth": 75,
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "sizing": "auto"
-          },
-          "pluginVersion": "12.4.0-21125823918",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"traces\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"traces\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"traces\"\n    }[$__rate_interval]\n  )\n)",
-              "instant": false,
-              "legendFormat": "Drop Rate",
-              "queryType": "range",
-              "range": true,
-              "refId": "drop_rate"
-            }
-          ],
-          "title": "Drop Rate",
-          "type": "gauge"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "description": "Logs processors inbound rate, aggregated across all processors",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "decimals": 0,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "ops"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 5,
-            "y": 73
-          },
-          "id": 83,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "12.4.0-21125823918",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"logs\"\n    }[$__rate_interval]\n  )\n)",
-              "instant": false,
-              "legendFormat": "__auto",
-              "queryType": "range",
-              "range": true,
-              "refId": "rate"
-            }
-          ],
-          "title": "Logs",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "decimals": 1,
-              "mappings": [],
-              "max": 1,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Drop Rate"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 2,
-            "x": 8,
-            "y": 73
-          },
-          "id": 84,
-          "options": {
-            "minVizHeight": 75,
-            "minVizWidth": 75,
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "sizing": "auto"
-          },
-          "pluginVersion": "12.4.0-21125823918",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"logs\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"logs\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"logs\"\n    }[$__rate_interval]\n  )\n)",
-              "instant": false,
-              "legendFormat": "Drop Rate",
-              "queryType": "range",
-              "range": true,
-              "refId": "drop_rate"
-            }
-          ],
-          "title": "Drop Rate",
-          "type": "gauge"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "description": "Metrics processors inbound rate, aggregated across all processors",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "decimals": 0,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "ops"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 10,
-            "y": 73
-          },
-          "id": 85,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "12.4.0-21125823918",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"metrics\"\n    }[$__rate_interval]\n  )\n)",
-              "instant": false,
-              "legendFormat": "__auto",
-              "queryType": "range",
-              "range": true,
-              "refId": "rate"
-            }
-          ],
-          "title": "Metrics",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "decimals": 1,
-              "mappings": [],
-              "max": 1,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Drop Rate"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Logs"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Metrics"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 2,
-            "x": 13,
-            "y": 73
-          },
-          "id": 86,
-          "options": {
-            "minVizHeight": 75,
-            "minVizWidth": 75,
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "sizing": "auto"
-          },
-          "pluginVersion": "12.4.0-21125823918",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"metrics\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"metrics\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"metrics\"\n    }[$__rate_interval]\n  )\n)",
-              "instant": false,
-              "legendFormat": "Drop Rate",
-              "queryType": "range",
-              "range": true,
-              "refId": "drop_rate"
-            }
-          ],
-          "title": "Drop Rate",
-          "type": "gauge"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${prometheus_datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "align": "auto",
-                "cellOptions": {
-                  "type": "auto"
-                },
-                "footer": {
-                  "reducers": []
-                },
-                "inspect": false
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byRegexp",
-                  "options": ".*Rate.*"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "cps"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byRegexp",
-                  "options": ".*\\%"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "percentunit"
-                  },
-                  {
-                    "id": "decimals",
-                    "value": 1
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 76
-          },
-          "id": 49,
-          "options": {
-            "cellHeight": "sm",
-            "frameIndex": 0,
-            "showHeader": true
-          },
-          "pluginVersion": "12.4.0-21125823918",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum by (otel_signal_processor)(\n  label_join(\n    (\n      sum by(processor, otel_signal) (\n        rate(otelcol_processor_outgoing_items_total{\n          deployment_environment_name=~\"$deployment_environment_name\",\n          k8s_cluster_name=~\"$k8s_cluster_name\",\n          k8s_node_name=~\"$k8s_node_name\",\n          host_name=~\"$host_name\",\n          service_instance_id=~\"$service_instance_id\",\n          service_name=~\"$service_name\"\n        }[$__rate_interval])\n      )\n      -\n      sum by(processor, otel_signal) (\n        rate(otelcol_processor_incoming_items_total{\n          deployment_environment_name=~\"$deployment_environment_name\",\n          k8s_cluster_name=~\"$k8s_cluster_name\",\n          k8s_node_name=~\"$k8s_node_name\",\n          host_name=~\"$host_name\",\n          service_instance_id=~\"$service_instance_id\",\n          service_name=~\"$service_name\"\n        }[$__rate_interval])\n      )\n    )\n    /\n    sum by(processor, otel_signal) (\n      rate(otelcol_processor_incoming_items_total{\n          deployment_environment_name=~\"$deployment_environment_name\",\n          k8s_cluster_name=~\"$k8s_cluster_name\",\n          k8s_node_name=~\"$k8s_node_name\",\n          host_name=~\"$host_name\",\n          service_instance_id=~\"$service_instance_id\",\n          service_name=~\"$service_name\"\n      }[$__rate_interval])\n    ),\n    \"otel_signal_processor\",\n    \"-\",\n    \"otel_signal\",\n    \"processor\"\n  )\n)",
-              "instant": false,
-              "queryType": "range",
-              "range": true,
-              "refId": "discarded_pct"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "editorMode": "code",
-              "expr": "sum by (otel_signal_processor)(\n  label_join(\n    sum by(processor, otel_signal) (\n      rate(otelcol_processor_incoming_items_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval])\n    ),\n    \"otel_signal_processor\",\n    \"-\",\n    \"otel_signal\",\n    \"processor\"\n  )\n)",
-              "instant": false,
-              "queryType": "range",
-              "range": true,
-              "refId": "inbound_rate"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${prometheus_datasource}"
-              },
-              "expr": "sum by (otel_signal_processor)(\n  label_join(\n    sum by(processor, otel_signal) (\n      rate(otelcol_processor_outgoing_items_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval])\n    ),\n    \"otel_signal_processor\",\n    \"-\",\n    \"otel_signal\",\n    \"processor\"\n  )\n)",
-              "instant": false,
-              "queryType": "range",
-              "range": true,
-              "refId": "outbound_rate"
-            }
-          ],
-          "title": "Processors",
-          "transformations": [
-            {
-              "id": "timeSeriesTable",
-              "options": {
-                "discarded_pct": {
-                  "timeField": "Time"
-                },
-                "inbound_rate": {
-                  "timeField": "Time"
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
                 }
               }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
             },
-            {
-              "id": "joinByField",
-              "options": {
-                "byField": "otel_signal_processor",
-                "mode": "outer"
-              }
-            },
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {},
-                "includeByName": {},
-                "indexByName": {
-                  "Trend #discarded_pct": 2,
-                  "Trend #inbound_rate": 1,
-                  "Trend #outbound_rate": 3,
-                  "otel_signal_processor": 0
-                },
-                "renameByName": {
-                  "Trend #discarded_pct": "Discarded %",
-                  "Trend #inbound_rate": "Inbound Rate",
-                  "Trend #outbound_rate": "Outbound Rate",
-                  "otel_signal_processor": "Processor",
-                  "otel_signal_receiver": ""
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
                 }
               }
-            }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 0,
+        "y": 17
+      },
+      "id": 81,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
           ],
-          "type": "table"
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"traces\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "queryType": "range",
+          "range": true,
+          "refId": "rate"
+        }
+      ],
+      "title": "Spans",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Drop Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 3,
+        "y": 17
+      },
+      "id": 75,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"traces\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"traces\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"traces\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "Drop Rate",
+          "queryType": "range",
+          "range": true,
+          "refId": "drop_rate"
+        }
+      ],
+      "title": "Drop Rate",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "description": "Logs processors inbound rate, aggregated across all processors",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 5,
+        "y": 17
+      },
+      "id": 83,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"logs\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "queryType": "range",
+          "range": true,
+          "refId": "rate"
+        }
+      ],
+      "title": "Logs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Drop Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 8,
+        "y": 17
+      },
+      "id": 84,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"logs\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"logs\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"logs\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "Drop Rate",
+          "queryType": "range",
+          "range": true,
+          "refId": "drop_rate"
+        }
+      ],
+      "title": "Drop Rate",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "description": "Metrics processors inbound rate, aggregated across all processors",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 10,
+        "y": 17
+      },
+      "id": 85,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"metrics\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "queryType": "range",
+          "range": true,
+          "refId": "rate"
+        }
+      ],
+      "title": "Metrics",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Drop Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Logs"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metrics"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 13,
+        "y": 17
+      },
+      "id": 86,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "(\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_incoming_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"metrics\"\n      }[$__rate_interval]\n    )\n  )\n-\n  sum by (otel_signal) (\n    rate(\n      otelcol_processor_outgoing_items_total{\n        deployment_environment_name =~ \"$deployment_environment_name\",\n        k8s_cluster_name           =~ \"$k8s_cluster_name\",\n        k8s_node_name              =~ \"$k8s_node_name\",\n        host_name                  =~ \"$host_name\",\n        service_instance_id        =~ \"$service_instance_id\",\n        service_name               =~ \"$service_name\",\n        otel_signal                =  \"metrics\"\n      }[$__rate_interval]\n    )\n  )\n)\n/\nsum by (otel_signal) (\n  rate(\n    otelcol_processor_incoming_items_total{\n      deployment_environment_name =~ \"$deployment_environment_name\",\n      k8s_cluster_name           =~ \"$k8s_cluster_name\",\n      k8s_node_name              =~ \"$k8s_node_name\",\n      host_name                  =~ \"$host_name\",\n      service_instance_id        =~ \"$service_instance_id\",\n      service_name               =~ \"$service_name\",\n      otel_signal                =  \"metrics\"\n    }[$__rate_interval]\n  )\n)",
+          "instant": false,
+          "legendFormat": "Drop Rate",
+          "queryType": "range",
+          "range": true,
+          "refId": "drop_rate"
+        }
+      ],
+      "title": "Drop Rate",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prometheus_datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*Rate.*"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "cps"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*\\%"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 20
+      },
+      "id": 49,
+      "options": {
+        "cellHeight": "sm",
+        "frameIndex": 0,
+        "showHeader": true
+      },
+      "pluginVersion": "12.4.0-21125823918",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (otel_signal_processor)(\n  label_join(\n    (\n      sum by(processor, otel_signal) (\n        rate(otelcol_processor_outgoing_items_total{\n          deployment_environment_name=~\"$deployment_environment_name\",\n          k8s_cluster_name=~\"$k8s_cluster_name\",\n          k8s_node_name=~\"$k8s_node_name\",\n          host_name=~\"$host_name\",\n          service_instance_id=~\"$service_instance_id\",\n          service_name=~\"$service_name\"\n        }[$__rate_interval])\n      )\n      -\n      sum by(processor, otel_signal) (\n        rate(otelcol_processor_incoming_items_total{\n          deployment_environment_name=~\"$deployment_environment_name\",\n          k8s_cluster_name=~\"$k8s_cluster_name\",\n          k8s_node_name=~\"$k8s_node_name\",\n          host_name=~\"$host_name\",\n          service_instance_id=~\"$service_instance_id\",\n          service_name=~\"$service_name\"\n        }[$__rate_interval])\n      )\n    )\n    /\n    sum by(processor, otel_signal) (\n      rate(otelcol_processor_incoming_items_total{\n          deployment_environment_name=~\"$deployment_environment_name\",\n          k8s_cluster_name=~\"$k8s_cluster_name\",\n          k8s_node_name=~\"$k8s_node_name\",\n          host_name=~\"$host_name\",\n          service_instance_id=~\"$service_instance_id\",\n          service_name=~\"$service_name\"\n      }[$__rate_interval])\n    ),\n    \"otel_signal_processor\",\n    \"-\",\n    \"otel_signal\",\n    \"processor\"\n  )\n)",
+          "instant": false,
+          "queryType": "range",
+          "range": true,
+          "refId": "discarded_pct"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (otel_signal_processor)(\n  label_join(\n    sum by(processor, otel_signal) (\n      rate(otelcol_processor_incoming_items_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval])\n    ),\n    \"otel_signal_processor\",\n    \"-\",\n    \"otel_signal\",\n    \"processor\"\n  )\n)",
+          "instant": false,
+          "queryType": "range",
+          "range": true,
+          "refId": "inbound_rate"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${prometheus_datasource}"
+          },
+          "expr": "sum by (otel_signal_processor)(\n  label_join(\n    sum by(processor, otel_signal) (\n      rate(otelcol_processor_outgoing_items_total{\n        deployment_environment_name=~\"$deployment_environment_name\",\n        k8s_cluster_name=~\"$k8s_cluster_name\",\n        k8s_node_name=~\"$k8s_node_name\",\n        host_name=~\"$host_name\",\n        service_instance_id=~\"$service_instance_id\",\n        service_name=~\"$service_name\"\n      }[$__rate_interval])\n    ),\n    \"otel_signal_processor\",\n    \"-\",\n    \"otel_signal\",\n    \"processor\"\n  )\n)",
+          "instant": false,
+          "queryType": "range",
+          "range": true,
+          "refId": "outbound_rate"
         }
       ],
       "title": "Processors",
-      "type": "row"
+      "transformations": [
+        {
+          "id": "timeSeriesTable",
+          "options": {
+            "discarded_pct": {
+              "timeField": "Time"
+            },
+            "inbound_rate": {
+              "timeField": "Time"
+            }
+          }
+        },
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "otel_signal_processor",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "Trend #discarded_pct": 2,
+              "Trend #inbound_rate": 1,
+              "Trend #outbound_rate": 3,
+              "otel_signal_processor": 0
+            },
+            "renameByName": {
+              "Trend #discarded_pct": "Discarded %",
+              "Trend #inbound_rate": "Inbound Rate",
+              "Trend #outbound_rate": "Outbound Rate",
+              "otel_signal_processor": "Processor",
+              "otel_signal_receiver": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "collapsed": false,
@@ -4602,7 +4601,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 28
       },
       "id": 47,
       "panels": [],
@@ -4651,36 +4650,6 @@
                 }
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Logs"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Metrics"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
           }
         ]
       },
@@ -4688,7 +4657,7 @@
         "h": 3,
         "w": 3,
         "x": 0,
-        "y": 18
+        "y": 29
       },
       "id": 43,
       "options": {
@@ -4807,7 +4776,7 @@
         "h": 3,
         "w": 2,
         "x": 3,
-        "y": 18
+        "y": 29
       },
       "id": 44,
       "options": {
@@ -4923,7 +4892,7 @@
         "h": 3,
         "w": 3,
         "x": 5,
-        "y": 18
+        "y": 29
       },
       "id": 70,
       "options": {
@@ -5042,7 +5011,7 @@
         "h": 3,
         "w": 2,
         "x": 8,
-        "y": 18
+        "y": 29
       },
       "id": 72,
       "options": {
@@ -5158,7 +5127,7 @@
         "h": 3,
         "w": 3,
         "x": 10,
-        "y": 18
+        "y": 29
       },
       "id": 71,
       "options": {
@@ -5277,7 +5246,7 @@
         "h": 3,
         "w": 2,
         "x": 13,
-        "y": 18
+        "y": 29
       },
       "id": 73,
       "options": {
@@ -5376,6 +5345,10 @@
               {
                 "id": "unit",
                 "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 1
               }
             ]
           }
@@ -5385,7 +5358,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 32
       },
       "id": 45,
       "options": {
@@ -5494,7 +5467,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 38
       },
       "id": 46,
       "panels": [],
@@ -5511,7 +5484,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 39
       },
       "id": 42,
       "options": {
@@ -5780,7 +5753,7 @@
   "timezone": "browser",
   "title": "OpenTelemetry Collector",
   "uid": "otel-collector_dashboard_prometheus-loki",
-  "version": 20,
+  "version": 22,
   "weekStart": "",
   "id": null
 }
