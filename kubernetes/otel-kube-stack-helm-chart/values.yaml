@@ -1,6 +1,9 @@
 # https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
 
-clusterName: unknown_k8s_cluster # TODO overwrite this value
+## @param clusterName Name of the Kubernetes cluster to be used as a resource attribute in telemetry data.
+## When the Kubernetes provider supports naming the cluster (eg EKS, AKS, GKE...), this value should be set accordingly.
+## TODO overwrite this value
+clusterName: unknown_k8s_cluster
 crds:
   installOtel: true
   installPrometheus: true
@@ -28,7 +31,8 @@ collectors:
           secretKeyRef:
             name: grafana-cloud-auth
             key: GRAFANA_CLOUD_BASIC_AUTH_HEADER
-    # disable Prometheus scrapping as it assumes the Prometheus Node Exporter and CAdvisor are setup
+    ## @param scrape_configs_file Path to a custom Prometheus scrape_configs file to be used by the OpenTelemetry Collector.
+    ## disable Prometheus scrapping as it assumes the Prometheus Node Exporter and CAdvisor are setup
     scrape_configs_file: ""
     presets:
       logsCollection:
@@ -50,13 +54,15 @@ collectors:
         metrics:
           enabled: true
     config:
+      connectors:
+        grafanacloud/connector:
       extensions:
         basicauth/grafana_cloud:
           client_auth:
             username: "${env:GRAFANA_CLOUD_INSTANCE_ID}"
             password: "${env:GRAFANA_CLOUD_API_KEY}"
       exporters:
-        otlphttp:
+        otlphttp/grafana_cloud:
           endpoint: "${env:GRAFANA_CLOUD_OTLP_ENDPOINT}"
           auth:
             authenticator: basicauth/grafana_cloud
@@ -65,13 +71,17 @@ collectors:
         pipelines:
           traces:
             exporters:
-              - otlphttp
+              - otlphttp/grafana_cloud
+              - grafanacloud/connector
           metrics:
+            receivers:
+              - otlp
+              - grafanacloud/connector
             exporters:
-              - otlphttp
+              - otlphttp/grafana_cloud
           logs:
             exporters:
-              - otlphttp
+              - otlphttp/grafana_cloud
         telemetry:
           resource:
             k8s.namespace.name: "${env:OTEL_K8S_NAMESPACE}"
@@ -82,11 +92,6 @@ collectors:
             host.name: "${env:OTEL_K8S_NODE_NAME}"
           metrics:
             readers:
-              - pull:
-                  exporter:
-                    prometheus:
-                      host: '0.0.0.0'
-                      port: 8888
               - periodic:
                   exporter:
                     otlp:
@@ -95,6 +100,12 @@ collectors:
                       headers:
                         - name: "authorization"
                           value: "${env:GRAFANA_CLOUD_BASIC_AUTH_HEADER}"
+              - pull:
+                  exporter:
+                    ## Publish internal metrics to ease troubleshooting connecting to the pod when needed
+                    prometheus:
+                      host: '0.0.0.0'
+                      port: 8888
           logs:
             processors:
               - batch:
@@ -110,11 +121,6 @@ instrumentation:
   enabled: true
   name: "otel-instrumentation"
   env:
-    - name: OTEL_K8S_NODE_NAME
-      # todo remove once https://github.com/open-telemetry/opentelemetry-helm-charts/pull/1961 is merged
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
     - name: OTEL_SEMCONV_STABILITY_OPT_IN
       value: "http,database"
   exporter:
@@ -154,10 +160,15 @@ opentelemetry-operator:
       prometheus.io/port: "8080"
   admissionWebhooks:
     certManager:
-      enabled: false # TODO in production environments, it is strongly recommended to use the cert-manager and overwriting this config to false. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement
+      ## @param enabled Enable cert-manager for managing TLS certificates for the admission webhooks
+      ## TODO in production environments, it is strongly recommended to use the cert-manager and overwriting this config to true. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement
+      enabled: false
     autoGenerateCert:
-      enabled: true # TODO disable when using a cert-manager
-      recreate: true # set to true when autoGenerateCert is enabled to prevent cert trust problems
+      ## @param enabled Enable auto generation of self-signed certificates for the admission webhooks
+      ## TODO disable when using a cert-manager
+      enabled: true
+      ## @param recreate Set to true when autoGenerateCert is enabled to prevent cert trust problems
+      recreate: true 
 defaultCRConfig:
   enabled: true
   targetAllocator:
