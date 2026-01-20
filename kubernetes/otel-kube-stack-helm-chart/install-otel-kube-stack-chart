@@ -33,7 +33,7 @@ export DEPLOYMENT_ENVIRONMENT_NAME="staging"
 # TODO shall we specify the version of the opentelemetry-kube-stack chart?
 
 helm upgrade opentelemetry-stack \
-    /Users/cyrilleleclerc/git/opentelemetry/opentelemetry-helm-charts/charts/opentelemetry-kube-stack \
+    open-telemetry/opentelemetry-kube-stack \
     --install \
     --namespace opentelemetry-operator-system \
     --set-string clusterName=$K8S_CLUSTER_NAME \
