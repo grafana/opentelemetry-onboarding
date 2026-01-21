@@ -394,7 +394,7 @@ spec:
         apiVersion: v1
         fieldPath: status.podIP
   - name: OTEL_RESOURCE_ATTRIBUTES
-    value: "k8s.cluster.name=unknown_k8s_cluster"
+    value: "k8s.cluster.name=a_k8s_cluster"
   
   - name: GRAFANA_CLOUD_API_KEY
     valueFrom:

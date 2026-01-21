@@ -14,7 +14,7 @@ generate-examples:
 		VALUES=$$(find $${EXAMPLES_DIR}/$${example} -name *values.yaml); \
 		rm -rf "$${EXAMPLES_DIR}/$${example}/rendered"; \
 		for value in $${VALUES}; do \
-			helm template opentelemetry-stack open-telemetry/opentelemetry-kube-stack --namespace opentelemetry-operator-system --values $${value} --values ./values.yaml --output-dir "$${EXAMPLES_DIR}/$${example}/rendered"; \
+			helm template opentelemetry-stack open-telemetry/opentelemetry-kube-stack --namespace opentelemetry-operator-system --values ./values.yaml --values $${value} --output-dir "$${EXAMPLES_DIR}/$${example}/rendered"; \
 			mv $${EXAMPLES_DIR}/$${example}/rendered/opentelemetry-kube-stack/templates/* "$${EXAMPLES_DIR}/$${example}/rendered"; \
 			SUBCHARTS_DIR=$${EXAMPLES_DIR}/$${example}/rendered/opentelemetry-kube-stack/charts; \
 			if [ -d "$${SUBCHARTS_DIR}" ]; then \

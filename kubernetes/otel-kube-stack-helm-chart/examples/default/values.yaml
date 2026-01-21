@@ -1,8 +1,8 @@
-clusterName: my_k8s_cluster
+clusterName: a_k8s_cluster
 instrumentation:
   resource:
     resourceAttributes:
-      deployment.environment.name: production
+      deployment.environment.name: staging
 opentelemetry-operator:
   admissionWebhooks:
     certManager:
