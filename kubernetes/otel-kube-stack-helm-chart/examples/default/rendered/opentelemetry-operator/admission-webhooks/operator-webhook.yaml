@@ -1,0 +1,224 @@
+---
+# Source: opentelemetry-kube-stack/charts/opentelemetry-operator/templates/admission-webhooks/operator-webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  labels:
+    helm.sh/chart: opentelemetry-operator-0.99.0
+    app.kubernetes.io/name: opentelemetry-operator
+    app.kubernetes.io/version: "0.138.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: opentelemetry-operator
+    app.kubernetes.io/instance: opentelemetry-stack
+    app.kubernetes.io/component: webhook
+  name: opentelemetry-stack-opentelemetry-operator-mutation
+webhooks:
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURSakNDQWk2Z0F3SUJBZ0lSQVBkMW9POFZHeFFHSUZrak1VUWkzc3N3RFFZSktvWklodmNOQVFFTEJRQXcKTFRFck1Da0dBMVVFQXhNaWIzQmxiblJsYkdWdFpYUnllUzF2Y0dWeVlYUnZjaTF2Y0dWeVlYUnZjaTFqWVRBZQpGdzB5TmpBeE1qRXlNVFUyTURoYUZ3MHlOekF4TWpFeU1UVTJNRGhhTUMweEt6QXBCZ05WQkFNVEltOXdaVzUwClpXeGxiV1YwY25rdGIzQmxjbUYwYjNJdGIzQmxjbUYwYjNJdFkyRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUEKQTRJQkR3QXdnZ0VLQW9JQkFRREo4VkVmdHFUbnEzZ2xEb3JkT2JpTzlnZFljeWVsajhONFBRWXFXOXdLTUtHSwpiTng1L2E2RGhLbnFOTjd6SDhFOEFaUmpySU9EV1J4SkZBeU5sRE9PcDhvbGFNTGxzTG1BYlF2OHVkdzU1Z3RrCm1KVldxRGQwVTluVmhKSHJjeVZsZTU5WG8xa1Y0cnRjeVJYWFl5a2NoNUNvT255ZUtodWszdEZXcDVZcFVyeDMKdUVMa2k4eUpVMDRld2pUV2RJZnNaYU05eXpLSUVrdEs0RzB3SEtIbE1IeEF0cXpkN1lrWGNzRThvQ3h3d2VZdQpHc1lDVzliRU5xVGVPUUdtNkVqSkhxTlhVOXJXL0trTUhMSlVTbTRpNEhKOUpUOW00TTJvMHNDVG9GZm9DKytRCnVJVG9idDBqcE1iaWhjTlNRdGtBaHFUTTUrb3RnQmV4UjhHdi9tMEJBZ01CQUFHallUQmZNQTRHQTFVZER3RUIKL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFILwpCQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVoRCtCeURqUDQ3REpURW9BczRyeHNVRWZGZWt3RFFZSktvWklodmNOCkFRRUxCUUFEZ2dFQkFJb2dBbVphZVpaUy9HYTRlL0lnblUrVWhnRm55amorMEU3bzdYYm1ycmszMi9ralpsd2kKRS9LQmIvNSttNWJaSHJZZkg4YkMwZCtYNlRGTnF0Qkl4bDlXUW9lek5CQUdaeXhMdjZISmFUd0lqUi9ia2RNVgp2NGN2MzRWRllFK3hEdTNJSnY2L1lHOEFCVmxGa3BvcUFOY3BlRkxiYWVaNThvT0VDY3lySWR2cTFUQ0RybjJ3CjJxQndPWjFmTTZoa3dxQUo0OEVOMUJ2MitTTitnTXZFaUd5ZSs5R3hWQ01rM2VRa1d5TGpESnFyUS9HZ0MvdG0KWnJFYmphRTBkNlhCTjhFR3lFemdHbk53UmRvc2pxek5ONkVtRENHOUdCOVBnRHRscFNVdFFvSkhpeTV3V2dhRgp1NTV6TWZJbEZEa1ZSUzN3bFBRNFE2ZTJxSnpmM1U2V25MOD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+      service:
+        name: opentelemetry-stack-opentelemetry-operator-webhook
+        namespace: opentelemetry-operator-system
+        path: /mutate-opentelemetry-io-v1alpha1-instrumentation
+        port: 443
+    failurePolicy: Ignore
+    name: minstrumentation.kb.io
+    rules:
+    - apiGroups:
+        - opentelemetry.io
+      apiVersions:
+        - v1alpha1
+      operations:
+        - CREATE
+        - UPDATE
+      resources:
+        - instrumentations
+      scope: Namespaced
+    sideEffects: None
+    timeoutSeconds: 10
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURSakNDQWk2Z0F3SUJBZ0lSQVBkMW9POFZHeFFHSUZrak1VUWkzc3N3RFFZSktvWklodmNOQVFFTEJRQXcKTFRFck1Da0dBMVVFQXhNaWIzQmxiblJsYkdWdFpYUnllUzF2Y0dWeVlYUnZjaTF2Y0dWeVlYUnZjaTFqWVRBZQpGdzB5TmpBeE1qRXlNVFUyTURoYUZ3MHlOekF4TWpFeU1UVTJNRGhhTUMweEt6QXBCZ05WQkFNVEltOXdaVzUwClpXeGxiV1YwY25rdGIzQmxjbUYwYjNJdGIzQmxjbUYwYjNJdFkyRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUEKQTRJQkR3QXdnZ0VLQW9JQkFRREo4VkVmdHFUbnEzZ2xEb3JkT2JpTzlnZFljeWVsajhONFBRWXFXOXdLTUtHSwpiTng1L2E2RGhLbnFOTjd6SDhFOEFaUmpySU9EV1J4SkZBeU5sRE9PcDhvbGFNTGxzTG1BYlF2OHVkdzU1Z3RrCm1KVldxRGQwVTluVmhKSHJjeVZsZTU5WG8xa1Y0cnRjeVJYWFl5a2NoNUNvT255ZUtodWszdEZXcDVZcFVyeDMKdUVMa2k4eUpVMDRld2pUV2RJZnNaYU05eXpLSUVrdEs0RzB3SEtIbE1IeEF0cXpkN1lrWGNzRThvQ3h3d2VZdQpHc1lDVzliRU5xVGVPUUdtNkVqSkhxTlhVOXJXL0trTUhMSlVTbTRpNEhKOUpUOW00TTJvMHNDVG9GZm9DKytRCnVJVG9idDBqcE1iaWhjTlNRdGtBaHFUTTUrb3RnQmV4UjhHdi9tMEJBZ01CQUFHallUQmZNQTRHQTFVZER3RUIKL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFILwpCQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVoRCtCeURqUDQ3REpURW9BczRyeHNVRWZGZWt3RFFZSktvWklodmNOCkFRRUxCUUFEZ2dFQkFJb2dBbVphZVpaUy9HYTRlL0lnblUrVWhnRm55amorMEU3bzdYYm1ycmszMi9ralpsd2kKRS9LQmIvNSttNWJaSHJZZkg4YkMwZCtYNlRGTnF0Qkl4bDlXUW9lek5CQUdaeXhMdjZISmFUd0lqUi9ia2RNVgp2NGN2MzRWRllFK3hEdTNJSnY2L1lHOEFCVmxGa3BvcUFOY3BlRkxiYWVaNThvT0VDY3lySWR2cTFUQ0RybjJ3CjJxQndPWjFmTTZoa3dxQUo0OEVOMUJ2MitTTitnTXZFaUd5ZSs5R3hWQ01rM2VRa1d5TGpESnFyUS9HZ0MvdG0KWnJFYmphRTBkNlhCTjhFR3lFemdHbk53UmRvc2pxek5ONkVtRENHOUdCOVBnRHRscFNVdFFvSkhpeTV3V2dhRgp1NTV6TWZJbEZEa1ZSUzN3bFBRNFE2ZTJxSnpmM1U2V25MOD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+      service:
+        name: opentelemetry-stack-opentelemetry-operator-webhook
+        namespace: opentelemetry-operator-system
+        path: /mutate-opentelemetry-io-v1beta1-opentelemetrycollector
+        port: 443
+    failurePolicy: Ignore
+    name: mopentelemetrycollectorbeta.kb.io
+    rules:
+      - apiGroups:
+          - opentelemetry.io
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - opentelemetrycollectors
+        scope: Namespaced
+    sideEffects: None
+    timeoutSeconds: 10
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURSakNDQWk2Z0F3SUJBZ0lSQVBkMW9POFZHeFFHSUZrak1VUWkzc3N3RFFZSktvWklodmNOQVFFTEJRQXcKTFRFck1Da0dBMVVFQXhNaWIzQmxiblJsYkdWdFpYUnllUzF2Y0dWeVlYUnZjaTF2Y0dWeVlYUnZjaTFqWVRBZQpGdzB5TmpBeE1qRXlNVFUyTURoYUZ3MHlOekF4TWpFeU1UVTJNRGhhTUMweEt6QXBCZ05WQkFNVEltOXdaVzUwClpXeGxiV1YwY25rdGIzQmxjbUYwYjNJdGIzQmxjbUYwYjNJdFkyRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUEKQTRJQkR3QXdnZ0VLQW9JQkFRREo4VkVmdHFUbnEzZ2xEb3JkT2JpTzlnZFljeWVsajhONFBRWXFXOXdLTUtHSwpiTng1L2E2RGhLbnFOTjd6SDhFOEFaUmpySU9EV1J4SkZBeU5sRE9PcDhvbGFNTGxzTG1BYlF2OHVkdzU1Z3RrCm1KVldxRGQwVTluVmhKSHJjeVZsZTU5WG8xa1Y0cnRjeVJYWFl5a2NoNUNvT255ZUtodWszdEZXcDVZcFVyeDMKdUVMa2k4eUpVMDRld2pUV2RJZnNaYU05eXpLSUVrdEs0RzB3SEtIbE1IeEF0cXpkN1lrWGNzRThvQ3h3d2VZdQpHc1lDVzliRU5xVGVPUUdtNkVqSkhxTlhVOXJXL0trTUhMSlVTbTRpNEhKOUpUOW00TTJvMHNDVG9GZm9DKytRCnVJVG9idDBqcE1iaWhjTlNRdGtBaHFUTTUrb3RnQmV4UjhHdi9tMEJBZ01CQUFHallUQmZNQTRHQTFVZER3RUIKL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFILwpCQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVoRCtCeURqUDQ3REpURW9BczRyeHNVRWZGZWt3RFFZSktvWklodmNOCkFRRUxCUUFEZ2dFQkFJb2dBbVphZVpaUy9HYTRlL0lnblUrVWhnRm55amorMEU3bzdYYm1ycmszMi9ralpsd2kKRS9LQmIvNSttNWJaSHJZZkg4YkMwZCtYNlRGTnF0Qkl4bDlXUW9lek5CQUdaeXhMdjZISmFUd0lqUi9ia2RNVgp2NGN2MzRWRllFK3hEdTNJSnY2L1lHOEFCVmxGa3BvcUFOY3BlRkxiYWVaNThvT0VDY3lySWR2cTFUQ0RybjJ3CjJxQndPWjFmTTZoa3dxQUo0OEVOMUJ2MitTTitnTXZFaUd5ZSs5R3hWQ01rM2VRa1d5TGpESnFyUS9HZ0MvdG0KWnJFYmphRTBkNlhCTjhFR3lFemdHbk53UmRvc2pxek5ONkVtRENHOUdCOVBnRHRscFNVdFFvSkhpeTV3V2dhRgp1NTV6TWZJbEZEa1ZSUzN3bFBRNFE2ZTJxSnpmM1U2V25MOD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+      service:
+        name: opentelemetry-stack-opentelemetry-operator-webhook
+        namespace: opentelemetry-operator-system
+        path: /mutate-v1-pod
+        port: 443
+    failurePolicy: Ignore
+    name: mpod.kb.io
+    rules:
+      - apiGroups:
+          - ""
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+        resources:
+          - pods
+        scope: Namespaced
+    sideEffects: None
+    timeoutSeconds: 10
+---
+# Source: opentelemetry-kube-stack/charts/opentelemetry-operator/templates/admission-webhooks/operator-webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  labels:
+    helm.sh/chart: opentelemetry-operator-0.99.0
+    app.kubernetes.io/name: opentelemetry-operator
+    app.kubernetes.io/version: "0.138.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: opentelemetry-operator
+    app.kubernetes.io/instance: opentelemetry-stack
+    app.kubernetes.io/component: webhook
+  name: opentelemetry-stack-opentelemetry-operator-validation
+webhooks:
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURSakNDQWk2Z0F3SUJBZ0lSQVBkMW9POFZHeFFHSUZrak1VUWkzc3N3RFFZSktvWklodmNOQVFFTEJRQXcKTFRFck1Da0dBMVVFQXhNaWIzQmxiblJsYkdWdFpYUnllUzF2Y0dWeVlYUnZjaTF2Y0dWeVlYUnZjaTFqWVRBZQpGdzB5TmpBeE1qRXlNVFUyTURoYUZ3MHlOekF4TWpFeU1UVTJNRGhhTUMweEt6QXBCZ05WQkFNVEltOXdaVzUwClpXeGxiV1YwY25rdGIzQmxjbUYwYjNJdGIzQmxjbUYwYjNJdFkyRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUEKQTRJQkR3QXdnZ0VLQW9JQkFRREo4VkVmdHFUbnEzZ2xEb3JkT2JpTzlnZFljeWVsajhONFBRWXFXOXdLTUtHSwpiTng1L2E2RGhLbnFOTjd6SDhFOEFaUmpySU9EV1J4SkZBeU5sRE9PcDhvbGFNTGxzTG1BYlF2OHVkdzU1Z3RrCm1KVldxRGQwVTluVmhKSHJjeVZsZTU5WG8xa1Y0cnRjeVJYWFl5a2NoNUNvT255ZUtodWszdEZXcDVZcFVyeDMKdUVMa2k4eUpVMDRld2pUV2RJZnNaYU05eXpLSUVrdEs0RzB3SEtIbE1IeEF0cXpkN1lrWGNzRThvQ3h3d2VZdQpHc1lDVzliRU5xVGVPUUdtNkVqSkhxTlhVOXJXL0trTUhMSlVTbTRpNEhKOUpUOW00TTJvMHNDVG9GZm9DKytRCnVJVG9idDBqcE1iaWhjTlNRdGtBaHFUTTUrb3RnQmV4UjhHdi9tMEJBZ01CQUFHallUQmZNQTRHQTFVZER3RUIKL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFILwpCQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVoRCtCeURqUDQ3REpURW9BczRyeHNVRWZGZWt3RFFZSktvWklodmNOCkFRRUxCUUFEZ2dFQkFJb2dBbVphZVpaUy9HYTRlL0lnblUrVWhnRm55amorMEU3bzdYYm1ycmszMi9ralpsd2kKRS9LQmIvNSttNWJaSHJZZkg4YkMwZCtYNlRGTnF0Qkl4bDlXUW9lek5CQUdaeXhMdjZISmFUd0lqUi9ia2RNVgp2NGN2MzRWRllFK3hEdTNJSnY2L1lHOEFCVmxGa3BvcUFOY3BlRkxiYWVaNThvT0VDY3lySWR2cTFUQ0RybjJ3CjJxQndPWjFmTTZoa3dxQUo0OEVOMUJ2MitTTitnTXZFaUd5ZSs5R3hWQ01rM2VRa1d5TGpESnFyUS9HZ0MvdG0KWnJFYmphRTBkNlhCTjhFR3lFemdHbk53UmRvc2pxek5ONkVtRENHOUdCOVBnRHRscFNVdFFvSkhpeTV3V2dhRgp1NTV6TWZJbEZEa1ZSUzN3bFBRNFE2ZTJxSnpmM1U2V25MOD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+      service:
+        name: opentelemetry-stack-opentelemetry-operator-webhook
+        namespace: opentelemetry-operator-system
+        path: /validate-opentelemetry-io-v1alpha1-instrumentation
+        port: 443
+    failurePolicy:  Ignore
+    name: vinstrumentationcreateupdate.kb.io
+    rules:
+    - apiGroups:
+        - opentelemetry.io
+      apiVersions:
+        - v1alpha1
+      operations:
+        - CREATE
+        - UPDATE
+      resources:
+        - instrumentations
+      scope: Namespaced
+    sideEffects: None
+    timeoutSeconds: 10
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURSakNDQWk2Z0F3SUJBZ0lSQVBkMW9POFZHeFFHSUZrak1VUWkzc3N3RFFZSktvWklodmNOQVFFTEJRQXcKTFRFck1Da0dBMVVFQXhNaWIzQmxiblJsYkdWdFpYUnllUzF2Y0dWeVlYUnZjaTF2Y0dWeVlYUnZjaTFqWVRBZQpGdzB5TmpBeE1qRXlNVFUyTURoYUZ3MHlOekF4TWpFeU1UVTJNRGhhTUMweEt6QXBCZ05WQkFNVEltOXdaVzUwClpXeGxiV1YwY25rdGIzQmxjbUYwYjNJdGIzQmxjbUYwYjNJdFkyRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUEKQTRJQkR3QXdnZ0VLQW9JQkFRREo4VkVmdHFUbnEzZ2xEb3JkT2JpTzlnZFljeWVsajhONFBRWXFXOXdLTUtHSwpiTng1L2E2RGhLbnFOTjd6SDhFOEFaUmpySU9EV1J4SkZBeU5sRE9PcDhvbGFNTGxzTG1BYlF2OHVkdzU1Z3RrCm1KVldxRGQwVTluVmhKSHJjeVZsZTU5WG8xa1Y0cnRjeVJYWFl5a2NoNUNvT255ZUtodWszdEZXcDVZcFVyeDMKdUVMa2k4eUpVMDRld2pUV2RJZnNaYU05eXpLSUVrdEs0RzB3SEtIbE1IeEF0cXpkN1lrWGNzRThvQ3h3d2VZdQpHc1lDVzliRU5xVGVPUUdtNkVqSkhxTlhVOXJXL0trTUhMSlVTbTRpNEhKOUpUOW00TTJvMHNDVG9GZm9DKytRCnVJVG9idDBqcE1iaWhjTlNRdGtBaHFUTTUrb3RnQmV4UjhHdi9tMEJBZ01CQUFHallUQmZNQTRHQTFVZER3RUIKL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFILwpCQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVoRCtCeURqUDQ3REpURW9BczRyeHNVRWZGZWt3RFFZSktvWklodmNOCkFRRUxCUUFEZ2dFQkFJb2dBbVphZVpaUy9HYTRlL0lnblUrVWhnRm55amorMEU3bzdYYm1ycmszMi9ralpsd2kKRS9LQmIvNSttNWJaSHJZZkg4YkMwZCtYNlRGTnF0Qkl4bDlXUW9lek5CQUdaeXhMdjZISmFUd0lqUi9ia2RNVgp2NGN2MzRWRllFK3hEdTNJSnY2L1lHOEFCVmxGa3BvcUFOY3BlRkxiYWVaNThvT0VDY3lySWR2cTFUQ0RybjJ3CjJxQndPWjFmTTZoa3dxQUo0OEVOMUJ2MitTTitnTXZFaUd5ZSs5R3hWQ01rM2VRa1d5TGpESnFyUS9HZ0MvdG0KWnJFYmphRTBkNlhCTjhFR3lFemdHbk53UmRvc2pxek5ONkVtRENHOUdCOVBnRHRscFNVdFFvSkhpeTV3V2dhRgp1NTV6TWZJbEZEa1ZSUzN3bFBRNFE2ZTJxSnpmM1U2V25MOD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+      service:
+        name: opentelemetry-stack-opentelemetry-operator-webhook
+        namespace: opentelemetry-operator-system
+        path: /validate-opentelemetry-io-v1alpha1-instrumentation
+        port: 443
+    failurePolicy: Ignore
+    name: vinstrumentationdelete.kb.io
+    rules:
+      - apiGroups:
+          - opentelemetry.io
+        apiVersions:
+          - v1alpha1
+        operations:
+          - DELETE
+        resources:
+          - instrumentations
+        scope: Namespaced
+    sideEffects: None
+    timeoutSeconds: 10
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURSakNDQWk2Z0F3SUJBZ0lSQVBkMW9POFZHeFFHSUZrak1VUWkzc3N3RFFZSktvWklodmNOQVFFTEJRQXcKTFRFck1Da0dBMVVFQXhNaWIzQmxiblJsYkdWdFpYUnllUzF2Y0dWeVlYUnZjaTF2Y0dWeVlYUnZjaTFqWVRBZQpGdzB5TmpBeE1qRXlNVFUyTURoYUZ3MHlOekF4TWpFeU1UVTJNRGhhTUMweEt6QXBCZ05WQkFNVEltOXdaVzUwClpXeGxiV1YwY25rdGIzQmxjbUYwYjNJdGIzQmxjbUYwYjNJdFkyRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUEKQTRJQkR3QXdnZ0VLQW9JQkFRREo4VkVmdHFUbnEzZ2xEb3JkT2JpTzlnZFljeWVsajhONFBRWXFXOXdLTUtHSwpiTng1L2E2RGhLbnFOTjd6SDhFOEFaUmpySU9EV1J4SkZBeU5sRE9PcDhvbGFNTGxzTG1BYlF2OHVkdzU1Z3RrCm1KVldxRGQwVTluVmhKSHJjeVZsZTU5WG8xa1Y0cnRjeVJYWFl5a2NoNUNvT255ZUtodWszdEZXcDVZcFVyeDMKdUVMa2k4eUpVMDRld2pUV2RJZnNaYU05eXpLSUVrdEs0RzB3SEtIbE1IeEF0cXpkN1lrWGNzRThvQ3h3d2VZdQpHc1lDVzliRU5xVGVPUUdtNkVqSkhxTlhVOXJXL0trTUhMSlVTbTRpNEhKOUpUOW00TTJvMHNDVG9GZm9DKytRCnVJVG9idDBqcE1iaWhjTlNRdGtBaHFUTTUrb3RnQmV4UjhHdi9tMEJBZ01CQUFHallUQmZNQTRHQTFVZER3RUIKL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFILwpCQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVoRCtCeURqUDQ3REpURW9BczRyeHNVRWZGZWt3RFFZSktvWklodmNOCkFRRUxCUUFEZ2dFQkFJb2dBbVphZVpaUy9HYTRlL0lnblUrVWhnRm55amorMEU3bzdYYm1ycmszMi9ralpsd2kKRS9LQmIvNSttNWJaSHJZZkg4YkMwZCtYNlRGTnF0Qkl4bDlXUW9lek5CQUdaeXhMdjZISmFUd0lqUi9ia2RNVgp2NGN2MzRWRllFK3hEdTNJSnY2L1lHOEFCVmxGa3BvcUFOY3BlRkxiYWVaNThvT0VDY3lySWR2cTFUQ0RybjJ3CjJxQndPWjFmTTZoa3dxQUo0OEVOMUJ2MitTTitnTXZFaUd5ZSs5R3hWQ01rM2VRa1d5TGpESnFyUS9HZ0MvdG0KWnJFYmphRTBkNlhCTjhFR3lFemdHbk53UmRvc2pxek5ONkVtRENHOUdCOVBnRHRscFNVdFFvSkhpeTV3V2dhRgp1NTV6TWZJbEZEa1ZSUzN3bFBRNFE2ZTJxSnpmM1U2V25MOD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+      service:
+        name: opentelemetry-stack-opentelemetry-operator-webhook
+        namespace: opentelemetry-operator-system
+        path: /validate-opentelemetry-io-v1beta1-opentelemetrycollector
+        port: 443
+    failurePolicy: Ignore
+    name: vopentelemetrycollectorcreateupdatebeta.kb.io
+    rules:
+      - apiGroups:
+          - opentelemetry.io
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - opentelemetrycollectors
+        scope: Namespaced
+    sideEffects: None
+    timeoutSeconds: 10
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURSakNDQWk2Z0F3SUJBZ0lSQVBkMW9POFZHeFFHSUZrak1VUWkzc3N3RFFZSktvWklodmNOQVFFTEJRQXcKTFRFck1Da0dBMVVFQXhNaWIzQmxiblJsYkdWdFpYUnllUzF2Y0dWeVlYUnZjaTF2Y0dWeVlYUnZjaTFqWVRBZQpGdzB5TmpBeE1qRXlNVFUyTURoYUZ3MHlOekF4TWpFeU1UVTJNRGhhTUMweEt6QXBCZ05WQkFNVEltOXdaVzUwClpXeGxiV1YwY25rdGIzQmxjbUYwYjNJdGIzQmxjbUYwYjNJdFkyRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUEKQTRJQkR3QXdnZ0VLQW9JQkFRREo4VkVmdHFUbnEzZ2xEb3JkT2JpTzlnZFljeWVsajhONFBRWXFXOXdLTUtHSwpiTng1L2E2RGhLbnFOTjd6SDhFOEFaUmpySU9EV1J4SkZBeU5sRE9PcDhvbGFNTGxzTG1BYlF2OHVkdzU1Z3RrCm1KVldxRGQwVTluVmhKSHJjeVZsZTU5WG8xa1Y0cnRjeVJYWFl5a2NoNUNvT255ZUtodWszdEZXcDVZcFVyeDMKdUVMa2k4eUpVMDRld2pUV2RJZnNaYU05eXpLSUVrdEs0RzB3SEtIbE1IeEF0cXpkN1lrWGNzRThvQ3h3d2VZdQpHc1lDVzliRU5xVGVPUUdtNkVqSkhxTlhVOXJXL0trTUhMSlVTbTRpNEhKOUpUOW00TTJvMHNDVG9GZm9DKytRCnVJVG9idDBqcE1iaWhjTlNRdGtBaHFUTTUrb3RnQmV4UjhHdi9tMEJBZ01CQUFHallUQmZNQTRHQTFVZER3RUIKL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFILwpCQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVoRCtCeURqUDQ3REpURW9BczRyeHNVRWZGZWt3RFFZSktvWklodmNOCkFRRUxCUUFEZ2dFQkFJb2dBbVphZVpaUy9HYTRlL0lnblUrVWhnRm55amorMEU3bzdYYm1ycmszMi9ralpsd2kKRS9LQmIvNSttNWJaSHJZZkg4YkMwZCtYNlRGTnF0Qkl4bDlXUW9lek5CQUdaeXhMdjZISmFUd0lqUi9ia2RNVgp2NGN2MzRWRllFK3hEdTNJSnY2L1lHOEFCVmxGa3BvcUFOY3BlRkxiYWVaNThvT0VDY3lySWR2cTFUQ0RybjJ3CjJxQndPWjFmTTZoa3dxQUo0OEVOMUJ2MitTTitnTXZFaUd5ZSs5R3hWQ01rM2VRa1d5TGpESnFyUS9HZ0MvdG0KWnJFYmphRTBkNlhCTjhFR3lFemdHbk53UmRvc2pxek5ONkVtRENHOUdCOVBnRHRscFNVdFFvSkhpeTV3V2dhRgp1NTV6TWZJbEZEa1ZSUzN3bFBRNFE2ZTJxSnpmM1U2V25MOD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+      service:
+        name: opentelemetry-stack-opentelemetry-operator-webhook
+        namespace: opentelemetry-operator-system
+        path: /validate-opentelemetry-io-v1beta1-opentelemetrycollector
+        port: 443
+    failurePolicy: Ignore
+    name: vopentelemetrycollectordeletebeta.kb.io
+    rules:
+      - apiGroups:
+          - opentelemetry.io
+        apiVersions:
+          - v1beta1
+        operations:
+          - DELETE
+        resources:
+          - opentelemetrycollectors
+        scope: Namespaced
+    sideEffects: None
+    timeoutSeconds: 10
+---
+# Source: opentelemetry-kube-stack/charts/opentelemetry-operator/templates/admission-webhooks/operator-webhook.yaml
+---
+---
+# Source: opentelemetry-kube-stack/charts/opentelemetry-operator/templates/admission-webhooks/operator-webhook.yaml
+---
+---
+# Source: opentelemetry-kube-stack/charts/opentelemetry-operator/templates/admission-webhooks/operator-webhook.yaml
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/tls
+metadata:
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation
+  labels:
+    helm.sh/chart: opentelemetry-operator-0.99.0
+    app.kubernetes.io/name: opentelemetry-operator
+    app.kubernetes.io/version: "0.138.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: opentelemetry-operator
+    app.kubernetes.io/instance: opentelemetry-stack
+    app.kubernetes.io/component: webhook
+  name: opentelemetry-stack-opentelemetry-operator-controller-manager-service-cert
+  namespace: opentelemetry-operator-system
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVCakNDQXU2Z0F3SUJBZ0lRV2lXSUF3a2pDZWdUbXFDWGpjaVBuekFOQmdrcWhraUc5dzBCQVFzRkFEQXQKTVNzd0tRWURWUVFERXlKdmNHVnVkR1ZzWlcxbGRISjVMVzl3WlhKaGRHOXlMVzl3WlhKaGRHOXlMV05oTUI0WApEVEkyTURFeU1USXhOVFl3T0ZvWERUSTNNREV5TVRJeE5UWXdPRm93TlRFek1ERUdBMVVFQXhNcWIzQmxiblJsCmJHVnRaWFJ5ZVMxemRHRmpheTF2Y0dWdWRHVnNaVzFsZEhKNUxXOXdaWEpoZEc5eU1JSUJJakFOQmdrcWhraUcKOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXVTeXhTWld4b1NMMWV1b1A3YlVYNDBxcjN3Mm5XOVZqbmRXbAo3bm9WeXNNNEdYV0h5U3Z1b1FDY2twQmlGenI3Q212NGZqMStab2xzSFdRZDRmaG1QbFdWVVF1a0xUZlp4YVZRCjRNM3VHeC9JS2l4R3V1cjJ3cnQ3bXZpdVc3NDRxSEkyRWl2Szl4ZnNYNDRGdjlRY0FRcXNqZVNFeTVEWmV5Qm4KUE1kalhmaUFkZ0NvMEhxWW11UmRpR1YxcjlBK2JpYkdXbzhCZlg4aGRHb2dMeE5rYlB2VEJ3WDJKdE00S1JSVgpnOEI1NXhxa3FURG01bWRJNnBzUnJSN2ZobVhBenlKNVBWVDk2Zmx6a29VOGxuN25zUFBhRDg0cTV4b1NpTzkyCk9PSjhqRHpPV0p2Z0xNV0hOa1ZqT2puSk5HRlVCd1lOZ0YzUGlJTFhyL01UMFRCSmJ3SURBUUFCbzRJQkdEQ0MKQVJRd0RnWURWUjBQQVFIL0JBUURBZ1dnTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3JCZ0VGQlFjRApBakFNQmdOVkhSTUJBZjhFQWpBQU1COEdBMVVkSXdRWU1CYUFGSVEvZ2NnNHorT3d5VXhLQUxPSzhiRkJIeFhwCk1JR3pCZ05WSFJFRWdhc3dnYWlDVUc5d1pXNTBaV3hsYldWMGNua3RjM1JoWTJzdGIzQmxiblJsYkdWdFpYUnkKZVMxdmNHVnlZWFJ2Y2kxM1pXSm9iMjlyTG05d1pXNTBaV3hsYldWMGNua3RiM0JsY21GMGIzSXRjM2x6ZEdWdApnbFJ2Y0dWdWRHVnNaVzFsZEhKNUxYTjBZV05yTFc5d1pXNTBaV3hsYldWMGNua3RiM0JsY21GMGIzSXRkMlZpCmFHOXZheTV2Y0dWdWRHVnNaVzFsZEhKNUxXOXdaWEpoZEc5eUxYTjVjM1JsYlM1emRtTXdEUVlKS29aSWh2Y04KQVFFTEJRQURnZ0VCQUFTM1A0N3VHTDc1WUJqaE9BWXFiVHIzVjZ2VmZJTSt5RHdnRVNxdVhnY2x5emx2aGJHWApNK3ZDRmNaMXlSY1lCcDVnZDRhdHNOTm5kenFiMi9tTjNIOUFFeHBGVzYyTXhXazVUUndnUEFEcDF6VytyVTd5CkVmQWtMREttaytNdXpsdVdzd2FMUWRuLzMwRlNFWW1MNlZ5MmV2bmNYbTFDYkFBZFl3SEdqaHY0bU9mbFI2dTgKUmVTcXZKelNpV1FoOEtIZlVsRmNWc2k0eUliTjhaK1B0am52RjIyT2FUS1FwNHhrMGlGT1hISkIvZVhNeUphQQo1d2xGaTNFQjRveW96ekMyT1RPTTNpYjEzR3JIdWtmbHRST2c3bHhFZFpWcVUvODBieWZ6UjRmZzBXZEw3WHdHCjQzUldvNXdKR3pnTVEvelNGTS9KYi94MU9LZzNUYmt5ak5BPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBdVN5eFNaV3hvU0wxZXVvUDdiVVg0MHFyM3cyblc5VmpuZFdsN25vVnlzTTRHWFdICnlTdnVvUUNja3BCaUZ6cjdDbXY0ZmoxK1pvbHNIV1FkNGZobVBsV1ZVUXVrTFRmWnhhVlE0TTN1R3gvSUtpeEcKdXVyMndydDdtdml1Vzc0NHFISTJFaXZLOXhmc1g0NEZ2OVFjQVFxc2plU0V5NURaZXlCblBNZGpYZmlBZGdDbwowSHFZbXVSZGlHVjFyOUErYmliR1dvOEJmWDhoZEdvZ0x4TmtiUHZUQndYMkp0TTRLUlJWZzhCNTV4cWtxVERtCjVtZEk2cHNSclI3ZmhtWEF6eUo1UFZUOTZmbHprb1U4bG43bnNQUGFEODRxNXhvU2lPOTJPT0o4akR6T1dKdmcKTE1XSE5rVmpPam5KTkdGVUJ3WU5nRjNQaUlMWHIvTVQwVEJKYndJREFRQUJBb0lCQUFEOUg5T3F0SzY0TXBGNgpTUWkxOWVUY01paHA2b2MvU0lGSFRrV3ZOL3JuVzJaR0Vhb29Sb0g2ayttc3FIaUtTTTZNS1dEbzkwTGdJREx4CkZyK0pwWVJXNmhoQW92Qkp3eDBYckdPM3pPUzlMelMyY1hwM0NHUHl6WTZwYzJPUEJXbW1vRUFRc3o0aTNDMXIKLzZtLzFyS3FEelJmYk5iRXcwcS8yZ3QrTkdYbnFMMERwK01NYnE3YzlNdk1ON2M5S0FDZWZvd2RaSnkwazhmego2WFRic1VHbndEdFZiK2JBNmMrWitRNEl3dWRpTjJybCtRVVZmdDdmQmxlejNjMEtQLzhlQjI5c1l6cXZXQzFzCm5XSFlGcUhBVmNDUjYvVkZJZ3BoZ0wxcFJVK2k1bUNtT3ZWcVhLQXJZNzVsYWlrVG1Cd1VHVmFwSzRWSXJJL0MKYWNRdGk3a0NnWUVBNXN1MEo5aTZ6Rm9WUnFqa25SbmMwNHA0Q0wrZWw2VVdJR01ueGFrZGNRemxRNFNCemFVSwpHTEFuVmNjcEpEUFZyQ0hkaVNiRXppVzdhR3VUTnBoN2hKc2xuektsaTZGRVorZVZDaUpLcUdjbHhDS2J5N3QyCjJzMU5YM2VULzhKbjd0M3d1RFNHRFY3U1ZEN3ZFREQ3Rkh2aGZENEdqVmx5RFZkK0ZRTW5CQ2NDZ1lFQXpXV1MKQ0R3OWZxZmxQbzUwVVpEMjI2dkRMdlNZMCsyNjhuU0czQ3pFRk1XbFFQZ3I0REE3Wm1GNHBudW9weFNFZWVNcwprcW10VXN0S1QyOVJRWEdPUnhIendCRHBQNnhPVXRaZmt2ZDA0blZ2LzQvZy9MZjhwVFh1a2FMYndiNVdsdytVCnVYRENUNklKRnJLWEt4bWJSVm5RYTFBeGZldDFYbk5oVGxySzlYa0NnWUVBZzVXK2FEMTcrd2lkT3NVT1dyZWwKSElMRS93L3BKc0o3eEFsa1lxQ1I1YU9aanc0Y1I1Z0NFcU5VT2Vhc0FUVUFiUHg5NXpWUVhjeExkalJuSVdoOAplOVZNOU9BV1hHNmNwclQxVjJySHNBM25EVlZDQ0QwZ2ZZMHh3TzFYVnltS3dqaU5oeWlEQ1ZwM2hvcS9HRGNrCjM3L2xoa1dDek5JallaSHhrNTlSZmw4Q2dZRUFqNThRUjlYbm9pTEFkOGVncWxCVmJURmpuL2ZFelp3VDl1bG8KUzVpNTIxU0F3emRGWnRRVEZQbmZKWHFlYVlZOVJBV0g2MTNlSm1Da0szdEpOQnUxUXhqWWVsclkzbjhibld6dApFNVVaRkNqT0VjT0hyTzd5S0l2WHI5cFRFOXlHSzhiblZldjAwejRZWU5pc1A2VCtIN1kzdUhJd3lUM1ZxaCsvCjBNeEgwdkVDZ1lFQTFSWkNqeWhvU3Z4YWY4VCt4cjhZN2xoTXZHZWJEQUpSdHhNL1g5NUljLzRyNEFJakNGT1QKbGRwc1NlS1Q5M0d5VjQyaHpjeDFsdXJMa2hUL0JCZHN0OXo0NERtNkd2L2I1N0pzNlhhZ1RybVUvNmRoRDFDYQpSZm5ZVlVUWVJzbWNSWmIrVlJtVDh1VU1ZQzNZWjhvQi9mQ3ZoZTFMdno0MFgzTElXRGx5OGRjPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURSakNDQWk2Z0F3SUJBZ0lSQVBkMW9POFZHeFFHSUZrak1VUWkzc3N3RFFZSktvWklodmNOQVFFTEJRQXcKTFRFck1Da0dBMVVFQXhNaWIzQmxiblJsYkdWdFpYUnllUzF2Y0dWeVlYUnZjaTF2Y0dWeVlYUnZjaTFqWVRBZQpGdzB5TmpBeE1qRXlNVFUyTURoYUZ3MHlOekF4TWpFeU1UVTJNRGhhTUMweEt6QXBCZ05WQkFNVEltOXdaVzUwClpXeGxiV1YwY25rdGIzQmxjbUYwYjNJdGIzQmxjbUYwYjNJdFkyRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUEKQTRJQkR3QXdnZ0VLQW9JQkFRREo4VkVmdHFUbnEzZ2xEb3JkT2JpTzlnZFljeWVsajhONFBRWXFXOXdLTUtHSwpiTng1L2E2RGhLbnFOTjd6SDhFOEFaUmpySU9EV1J4SkZBeU5sRE9PcDhvbGFNTGxzTG1BYlF2OHVkdzU1Z3RrCm1KVldxRGQwVTluVmhKSHJjeVZsZTU5WG8xa1Y0cnRjeVJYWFl5a2NoNUNvT255ZUtodWszdEZXcDVZcFVyeDMKdUVMa2k4eUpVMDRld2pUV2RJZnNaYU05eXpLSUVrdEs0RzB3SEtIbE1IeEF0cXpkN1lrWGNzRThvQ3h3d2VZdQpHc1lDVzliRU5xVGVPUUdtNkVqSkhxTlhVOXJXL0trTUhMSlVTbTRpNEhKOUpUOW00TTJvMHNDVG9GZm9DKytRCnVJVG9idDBqcE1iaWhjTlNRdGtBaHFUTTUrb3RnQmV4UjhHdi9tMEJBZ01CQUFHallUQmZNQTRHQTFVZER3RUIKL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFILwpCQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVoRCtCeURqUDQ3REpURW9BczRyeHNVRWZGZWt3RFFZSktvWklodmNOCkFRRUxCUUFEZ2dFQkFJb2dBbVphZVpaUy9HYTRlL0lnblUrVWhnRm55amorMEU3bzdYYm1ycmszMi9ralpsd2kKRS9LQmIvNSttNWJaSHJZZkg4YkMwZCtYNlRGTnF0Qkl4bDlXUW9lek5CQUdaeXhMdjZISmFUd0lqUi9ia2RNVgp2NGN2MzRWRllFK3hEdTNJSnY2L1lHOEFCVmxGa3BvcUFOY3BlRkxiYWVaNThvT0VDY3lySWR2cTFUQ0RybjJ3CjJxQndPWjFmTTZoa3dxQUo0OEVOMUJ2MitTTitnTXZFaUd5ZSs5R3hWQ01rM2VRa1d5TGpESnFyUS9HZ0MvdG0KWnJFYmphRTBkNlhCTjhFR3lFemdHbk53UmRvc2pxek5ONkVtRENHOUdCOVBnRHRscFNVdFFvSkhpeTV3V2dhRgp1NTV6TWZJbEZEa1ZSUzN3bFBRNFE2ZTJxSnpmM1U2V25MOD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=

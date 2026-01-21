@@ -128,7 +128,7 @@ instrumentation:
     endpoint: http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318
   resource:
     resourceAttributes:
-      deployment.environment.name: production # TODO customize as needed
+      deployment.environment.name: production # overwrite as needed
   propagators:
     - tracecontext
     - baggage
@@ -145,9 +145,6 @@ instrumentation:
       value: s
   nodejs:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs:0.67.2
-    env:
-    - name: OTEL_SEMCONV_STABILITY_OPT_IN
-      value: "http"
   dotnet:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-dotnet:1.13.0
   python:

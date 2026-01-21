@@ -1,0 +1,9 @@
+clusterName: my_k8s_cluster
+instrumentation:
+  resource:
+    resourceAttributes:
+      deployment.environment.name: production
+opentelemetry-operator:
+  admissionWebhooks:
+    certManager:
+      enabled: true
