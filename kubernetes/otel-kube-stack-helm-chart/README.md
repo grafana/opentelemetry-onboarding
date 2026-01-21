@@ -7,16 +7,77 @@
 
 ## Getting Started
 
+### Install OpenTelemetry Collector and Operator
 
-### Enable insrumentation of the workloads
+Install the OpenTelemetry Collector and Operator on your Kubernetes cluster using the [OpenTelemetry Kube Stack Helm Chart](https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack).
 
-* Auto-instrumentation is ecommended everywhere possible like Java. For some programming languages, it's better to do manual insyrumentation with bootstrap code (e.g. some .Net use cases)
+#### Prerequisites
 
-* Manual instrumentation
-   * It's strongly recommended to inject OTel configuration using the OTel Operator to ensure the `service.name`,  `service.namespace`, `service.instance.id` , `service.version` , `deployment.environment.name`... are consistent across all telemetry ingestion flows aligning on the [Specify resource attributes using Kubernetes annotations](https://opentelemetry.io/docs/specs/semconv/non-normative/k8s-attributes/) :  OTel SDK emitted telemetry, pod logs...
-   * Use the K8s pod annotation `instrumentation.opentelemetry.io/inject-sdk: true` or `instrumentation.opentelemetry.io/inject-sdk: my_k8s_namespace/my_otel_instr_crd_name`
-* Auto-instr
-   * Use the K8s pod annotation `instrumentation.opentelemetry.io/inject-<< language >>: true` or `instrumentation.opentelemetry.io/inject-<< language >: my_k8s_namespace/my_otel_instr_crd_name`
+The installation script will prompt you for the following information:
+
+* **Grafana Cloud Credentials**: Your Grafana Cloud instance ID, OTLP endpoint URL, and API key
+* **Kubernetes Cluster Name**: The name of your Kubernetes cluster (e.g., from AWS EKS, Azure AKS, or Google GKE)
+* **Deployment Environment**: The environment name for your cluster (e.g., 'production', 'staging', or 'development')
+
+#### Run the Installation Script
+
+```console
+$ ./install-otel-kube-stack-chart
+```
+
+#### Installation Characteristics
+* OpenTelemetry Collector:
+   * Installed as a daemonset on each Kubernetes node, in the Kubernetes namespace `opentelemetry-operator-system`
+   * Send telemetry to Grafana Cloud
+   * Collects:
+     * Receive OTLP traces, metrics, and logs
+     * Kubernetes cluster metrics and events
+     * Kubernetes pod logs and metrics (ie Kubelet  metrics)
+     * Kubernetes node host metrics
+     * Workload metrics of Kubernetes pods annotated with the `io.opentelemetry.discovery.[metrics|logs]` annotations (see [OpenTelemetry Collector Receiver Creator Receiver](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/receivercreator))
+  * Internal telemetry configured to send metrics and logs to Grafana Cloud
+* OpenTelemetry Operator: 
+   * Installed in the Kubernetes namespace `opentelemetry-operator-system`
+   * Instrumentation CRD with
+      * OTLP endpoint: the URL of the OTLP endpoint of the daemon collectors: `http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318`
+      * Sensible defaults to get the best of Grafana Cloud
+* Grafana Cloud Credentials deployed as a Kubernetes secret `grafana-cloud-auth` in the Kubernetes namespace `opentelemetry-operator-system`
+
+### Enable Instrumentation of Workloads
+
+#### Choose Your Instrumentation Strategy
+
+**Auto-instrumentation** is the recommended approach for most applications as it requires minimal code changes:
+* Ideal for Java, Node.js, .NET, and Python applications
+* Uses the OpenTelemetry Operator to inject instrumentation automatically
+* Reduces configuration overhead and improves consistency
+
+**Manual instrumentation** may be necessary for certain scenarios:
+* Some .NET applications with complex dependency injection
+* Applications requiring custom instrumentation logic
+* Languages without mature auto-instrumentation support
+
+#### Auto-instrumentation Setup
+
+Add the following pod annotation to enable auto-instrumentation:
+
+```yaml
+instrumentation.opentelemetry.io/inject-<<language>>: opentelemetry-operator-system/otel-instrumentation
+```
+
+Replace `<<language>>` with your application's language. Supported values include `java`, `dotnet`, `nodejs`, `python`, and others. See the [OpenTelemetry Operator documentation](https://github.com/open-telemetry/opentelemetry-operator?tab=readme-ov-file#opentelemetry-auto-instrumentation-injection) for the complete list.
+
+#### Manual Instrumentation Setup
+
+For manual instrumentation, it is recommended to enable configuration injection using the annotation:
+
+```yaml
+instrumentation.opentelemetry.io/inject-sdk: opentelemetry-operator-system/otel-instrumentation
+```
+
+The OpenTelemetry Operator will inject SDK configuration through pod environment variables, ensuring consistent resource attributes (`service.name`, `service.namespace`, `service.instance.id`, `service.version`, `deployment.environment.name`) across all telemetry streams, aligning with the [OpenTelemetry semantic conventions](https://opentelemetry.io/docs/specs/semconv/non-normative/k8s-attributes/).
+
+If configuration injection is not possible, use in the configuration of OpenTelemetry SDKs the OTLP endpoint `http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318` for `http/protobuf` or port `4317`for `grpc`.
 
 Resource attributes best practices:
 * `service.name`: decreasing preference

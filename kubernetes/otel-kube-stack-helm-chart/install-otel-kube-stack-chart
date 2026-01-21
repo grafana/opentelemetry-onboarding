@@ -1,19 +1,56 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source .env
+# Load environment variables from .env file if it exists
+[[ -f .env ]] && source .env
 
-# Validate required files exist
 if [[ ! -f ".env" ]]; then
-    echo "Error: .env file not found in current directory. "
-    exit 1
+    echo ".env file not found. Entering interactive setup..."
+    # Prompt user for Grafana Cloud credentials
+    read -p "Grafana Cloud Instance ID (eg: '123456'): " GRAFANA_CLOUD_INSTANCE_ID
+    read -p "Grafana Cloud OTLP Endpoint (eg: 'https://otlp-gateway-prod-eu-west-0.grafana.net/otlp'): " GRAFANA_CLOUD_OTLP_ENDPOINT
+    read -p "Grafana Cloud API Key (eg: 'gcp_...'): " GRAFANA_CLOUD_API_KEY
+
+    # Generate Basic Authentication Header
+    BASIC_AUTH_CREDENTIALS_CLEAR_TEXT="${GRAFANA_CLOUD_INSTANCE_ID}:${GRAFANA_CLOUD_API_KEY}"
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        GRAFANA_CLOUD_BASIC_AUTH_HEADER=$(echo -n "${BASIC_AUTH_CREDENTIALS_CLEAR_TEXT}" | base64 -w 0)
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        GRAFANA_CLOUD_BASIC_AUTH_HEADER=$(echo -n "${BASIC_AUTH_CREDENTIALS_CLEAR_TEXT}" | /usr/bin/base64 --break=0)
+    else
+        echo "Error: Unsupported OS for base64 encoding."
+        exit 1
+    fi
+
+    # Ask if user wants to save to .env file
+    read -p "Save credentials to .env file? (y/n): " SAVE_TO_ENV
+    if [[ "$SAVE_TO_ENV" == "y" || "$SAVE_TO_ENV" == "Y" ]]; then
+        # Save to .env file
+        {
+            echo "export GRAFANA_CLOUD_INSTANCE_ID=\"${GRAFANA_CLOUD_INSTANCE_ID}\""
+            echo "export GRAFANA_CLOUD_OTLP_ENDPOINT=\"${GRAFANA_CLOUD_OTLP_ENDPOINT}\""
+            echo "export GRAFANA_CLOUD_API_KEY=\"${GRAFANA_CLOUD_API_KEY}\""
+            echo "export GRAFANA_CLOUD_BASIC_AUTH_HEADER=\"Basic ${GRAFANA_CLOUD_BASIC_AUTH_HEADER}\""
+        } >> .env
+        echo ".env file created successfully."
+    else
+        echo "Credentials not saved to .env file. Please set the environment variables manually."
+        exit 1
+    fi
 fi
+
+
+read -p "Kubernetes Cluster Name (default: 'my_k8s_cluster'): " K8S_CLUSTER_NAME
+export K8S_CLUSTER_NAME=${K8S_CLUSTER_NAME:-my_k8s_cluster}
+
+read -p "Deployment Environment Name like 'production', 'staging'... (default: 'production'): " DEPLOYMENT_ENVIRONMENT_NAME
+export DEPLOYMENT_ENVIRONMENT_NAME=${DEPLOYMENT_ENVIRONMENT_NAME:-production}
 
 # WARNING: dont change "namespace=opentelemetry-operator-system" as it is used in the 'instrumentation' CRD defined in values.yaml
 
 echo "Installing OpenTelemetry Kube Stack Helm Chart..."
 
-kubectl create namespace opentelemetry-operator-system || echo "WARNING Namespace 'opentelemetry-operator-system' already exists, continuing..."
+kubectl create namespace opentelemetry-operator-system || echo "WARNING: Could not create namespace 'opentelemetry-operator-system' (may already exist or insufficient permissions). Continuing..."
 
 kubectl create secret generic grafana-cloud-auth \
   --namespace opentelemetry-operator-system  \
@@ -21,19 +58,14 @@ kubectl create secret generic grafana-cloud-auth \
   --from-literal=GRAFANA_CLOUD_OTLP_ENDPOINT="$GRAFANA_CLOUD_OTLP_ENDPOINT" \
   --from-literal=GRAFANA_CLOUD_API_KEY="$GRAFANA_CLOUD_API_KEY" \
   --from-literal=GRAFANA_CLOUD_BASIC_AUTH_HEADER="$GRAFANA_CLOUD_BASIC_AUTH_HEADER" \
-  || echo "WARNING Secret 'grafana-cloud-auth' already exists in namespace 'opentelemetry-operator-system', continuing..."
+  || echo "WARNING: Could not create secret 'grafana-cloud-auth' (may already exist or insufficient permissions). Continuing..."
 
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo update
 
-# TODO customize these values as needed
-export K8S_CLUSTER_NAME="my_k8s_cluster"
-export DEPLOYMENT_ENVIRONMENT_NAME="staging"
-
-# TODO shall we specify the version of the opentelemetry-kube-stack chart?
-
 helm upgrade opentelemetry-stack \
     open-telemetry/opentelemetry-kube-stack \
+    --version 0.12.7 \
     --install \
     --namespace opentelemetry-operator-system \
     --set-string clusterName=$K8S_CLUSTER_NAME \
