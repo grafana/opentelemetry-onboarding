@@ -58,21 +58,8 @@ export K8S_CLUSTER_NAME=${K8S_CLUSTER_NAME:-my_k8s_cluster}
 read -p "Deployment Environment Name like 'production', 'staging'... (default: 'production'): " DEPLOYMENT_ENVIRONMENT_NAME
 export DEPLOYMENT_ENVIRONMENT_NAME=${DEPLOYMENT_ENVIRONMENT_NAME:-production}
 
-read -p "OpenTelemetry Operator Certificate Source (supported values: 'cert-manager', 'self-signed'; default: 'self-signed'): " OTEL_OPERATOR_CERTIFICATE_SOURCE
-export OTEL_OPERATOR_CERTIFICATE_SOURCE=${OTEL_OPERATOR_CERTIFICATE_SOURCE:-self-signed}
-
-# Validate certificate source
-case "$OTEL_OPERATOR_CERTIFICATE_SOURCE" in
-    self-signed)
-        OTEL_OPERATOR_CERT_MANAGER_ENABLED="false"
-        ;;
-    cert-manager)
-        OTEL_OPERATOR_CERT_MANAGER_ENABLED="true"
-        ;;
-    *)
-        error "Invalid OpenTelemetry Operator Certificate Source: '$OTEL_OPERATOR_CERTIFICATE_SOURCE'. Supported values: 'self-signed', 'cert-manager'"
-        ;;
-esac
+read -p "OpenTelemetry Operator certificates: use cert-manager? (true: uses cert-manager, recommended for production; false: uses self-signed certificates, discouraged in production; default: false): " OTEL_OPERATOR_CERT_MANAGER_ENABLED
+export OTEL_OPERATOR_CERT_MANAGER_ENABLED=${OTEL_OPERATOR_CERT_MANAGER_ENABLED:-false}
 
 echo ""
 
@@ -85,12 +72,10 @@ echo ""
 # export GRAFANA_CLOUD_OTLP_ENDPOINT="https://otlp-gateway-prod-eu-west-0.grafana.net/otlp"
 # export K8S_CLUSTER_NAME="my_k8s_cluster"
 # export DEPLOYMENT_ENVIRONMENT_NAME="production"
-# export CERTIFICATE_SOURCE="kube-cert-manager" # options: "kube-cert-manager", "auto-generate"
 
 # WARNING: dont change "namespace=opentelemetry-operator-system" as it is used in the 'instrumentation' CRD defined in values.yaml
 
 # TODO
-# - REQUIRED: Add support for both certificate sources: 1) from Kube Sert Manager, 2) auto generate certs
 # - NICE TO HAVE: Add Kubernetes provider handling in the pipeline to get `k8s.cluster.name`, `host.id`, `cloud.*``, requires user to indicate which provider they are using (EKS, GKE, AKS, etc)
 
 echo "Installing OpenTelemetry Kube Stack Helm Chart..."
