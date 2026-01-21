@@ -10,8 +10,13 @@ if [[ ! -f ".env" ]]; then
     echo ".env file not found. Entering interactive setup..."
     # Prompt user for Grafana Cloud credentials
     read -p "Grafana Cloud Instance ID (eg: '123456'): " GRAFANA_CLOUD_INSTANCE_ID
+    [[ -z "$GRAFANA_CLOUD_INSTANCE_ID" ]] && error "Grafana Cloud Instance ID cannot be empty"
+    
     read -p "Grafana Cloud OTLP Endpoint (eg: 'https://otlp-gateway-prod-eu-west-0.grafana.net/otlp'): " GRAFANA_CLOUD_OTLP_ENDPOINT
+    [[ -z "$GRAFANA_CLOUD_OTLP_ENDPOINT" ]] && error "Grafana Cloud OTLP Endpoint cannot be empty"
+    
     read -p "Grafana Cloud API Key (eg: 'gcp_...'): " GRAFANA_CLOUD_API_KEY
+    [[ -z "$GRAFANA_CLOUD_API_KEY" ]] && error "Grafana Cloud API Key cannot be empty"
 
     # Generate Basic Authentication Header
     BASIC_AUTH_CREDENTIALS_CLEAR_TEXT="${GRAFANA_CLOUD_INSTANCE_ID}:${GRAFANA_CLOUD_API_KEY}"
@@ -20,8 +25,7 @@ if [[ ! -f ".env" ]]; then
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         GRAFANA_CLOUD_BASIC_AUTH_HEADER=$(echo -n "${BASIC_AUTH_CREDENTIALS_CLEAR_TEXT}" | /usr/bin/base64 --break=0)
     else
-        echo "Error: Unsupported OS for base64 encoding."
-        exit 1
+        error "Unsupported OS for base64 encoding"
     fi
 
     # Ask if user wants to save to .env file
@@ -35,18 +39,43 @@ if [[ ! -f ".env" ]]; then
             echo "export GRAFANA_CLOUD_BASIC_AUTH_HEADER=\"Basic ${GRAFANA_CLOUD_BASIC_AUTH_HEADER}\""
         } >> .env
         echo ".env file created successfully."
-    else
-        echo "Credentials not saved to .env file. Please set the environment variables manually."
-        exit 1
     fi
 fi
 
+# Verify all required credentials are set
+[[ -z "${GRAFANA_CLOUD_INSTANCE_ID:-}" ]] && error "GRAFANA_CLOUD_INSTANCE_ID is not set"
+[[ -z "${GRAFANA_CLOUD_OTLP_ENDPOINT:-}" ]] && error "GRAFANA_CLOUD_OTLP_ENDPOINT is not set"
+[[ -z "${GRAFANA_CLOUD_API_KEY:-}" ]] && error "GRAFANA_CLOUD_API_KEY is not set"
+[[ -z "${GRAFANA_CLOUD_BASIC_AUTH_HEADER:-}" ]] && error "GRAFANA_CLOUD_BASIC_AUTH_HEADER is not set"
+
+echo ""
+echo "Collecting deployment configuration..."
+echo ""
 
 read -p "Kubernetes Cluster Name (default: 'my_k8s_cluster'): " K8S_CLUSTER_NAME
 export K8S_CLUSTER_NAME=${K8S_CLUSTER_NAME:-my_k8s_cluster}
 
 read -p "Deployment Environment Name like 'production', 'staging'... (default: 'production'): " DEPLOYMENT_ENVIRONMENT_NAME
 export DEPLOYMENT_ENVIRONMENT_NAME=${DEPLOYMENT_ENVIRONMENT_NAME:-production}
+
+read -p "OpenTelemetry Operator Certificate Source (supported values: 'cert-manager', 'self-signed'; default: 'self-signed'): " OTEL_OPERATOR_CERTIFICATE_SOURCE
+export OTEL_OPERATOR_CERTIFICATE_SOURCE=${OTEL_OPERATOR_CERTIFICATE_SOURCE:-self-signed}
+
+# Validate certificate source
+case "$OTEL_OPERATOR_CERTIFICATE_SOURCE" in
+    self-signed)
+        OTEL_OPERATOR_CERT_MANAGER_ENABLED="false"
+        ;;
+    cert-manager)
+        OTEL_OPERATOR_CERT_MANAGER_ENABLED="true"
+        ;;
+    *)
+        error "Invalid OpenTelemetry Operator Certificate Source: '$OTEL_OPERATOR_CERTIFICATE_SOURCE'. Supported values: 'self-signed', 'cert-manager'"
+        ;;
+esac
+
+echo ""
+
 
 #### BEGINNING OF INSTALLATION SCRIPT
 
@@ -84,11 +113,15 @@ helm upgrade opentelemetry-stack \
     --version 0.12.7 \
     --install \
     --namespace opentelemetry-operator-system \
+    --set opentelemetry-operator.admissionWebhooks.certManager.enabled=$OTEL_OPERATOR_CERT_MANAGER_ENABLED \
     --set-string clusterName=$K8S_CLUSTER_NAME \
     --set-string instrumentation.resource.resourceAttributes.deployment\\.environment\\.name=$DEPLOYMENT_ENVIRONMENT_NAME \
-    -f values.yaml
+    -f https://raw.githubusercontent.com/grafana/opentelemetry-onboarding/refs/heads/main/kubernetes/otel-kube-stack-helm-chart/values.yaml
 
 echo ""
-echo "OpenTelemetry Kube Stack Helm Chart installation completed successfully!"
-echo "Send OTLP to 'http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318' (http/protobuff)"
-echo "Or annotate your pods with: 'instrumentation.opentelemetry.io/inject-<<language>>: opentelemetry-operator-system/otel-instrumentation' to auto-instrument them."
+echo "✓ OpenTelemetry Kube Stack installed successfully!"
+echo ""
+echo "Next steps:"
+echo "  - Send OTLP to: http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318 (HTTP/Protobuf)"
+echo "  - Auto-instrument pods by adding this annotation:"
+echo "    instrumentation.opentelemetry.io/inject-<language>: opentelemetry-operator-system/otel-instrumentation"
