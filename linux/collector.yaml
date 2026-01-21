@@ -12,43 +12,6 @@ receivers:
           allowed_origins:
             - "http://*"
             - "https://*"
-  httpcheck/frontend-proxy:
-    targets:
-      - endpoint: http://${env:FRONTEND_PROXY_ADDR}
-  nginx:
-    endpoint: http://${env:IMAGE_PROVIDER_HOST}:${env:IMAGE_PROVIDER_PORT}/status
-    collection_interval: 10s
-  docker_stats:
-    endpoint: unix:///var/run/docker.sock
-    # https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/44511
-    api_version: "1.44"
-  postgresql:
-    endpoint: ${POSTGRES_HOST}:${POSTGRES_PORT}
-    username: root
-    password: ${POSTGRES_PASSWORD}
-    metrics:
-      postgresql.blks_hit:
-        enabled: true
-      postgresql.blks_read:
-        enabled: true
-      postgresql.tup_fetched:
-        enabled: true
-      postgresql.tup_returned:
-        enabled: true
-      postgresql.tup_inserted:
-        enabled: true
-      postgresql.tup_updated:
-        enabled: true
-      postgresql.tup_deleted:
-        enabled: true
-      postgresql.deadlocks:
-        enabled: true
-    tls:
-      insecure: true
-  redis:
-    endpoint: "valkey-cart:6379"
-    username: "valkey"
-    collection_interval: 10s
   # Host metrics
   hostmetrics:
     root_path: /hostfs
