@@ -61,6 +61,11 @@ export DEPLOYMENT_ENVIRONMENT_NAME=${DEPLOYMENT_ENVIRONMENT_NAME:-production}
 read -p "OpenTelemetry Operator certificates: use cert-manager? (true: uses cert-manager, recommended for production; false: uses self-signed certificates, discouraged in production; default: false): " OTEL_OPERATOR_CERT_MANAGER_ENABLED
 export OTEL_OPERATOR_CERT_MANAGER_ENABLED=${OTEL_OPERATOR_CERT_MANAGER_ENABLED:-false}
 
+# Validate cert-manager choice
+if [[ "$OTEL_OPERATOR_CERT_MANAGER_ENABLED" != "true" && "$OTEL_OPERATOR_CERT_MANAGER_ENABLED" != "false" ]]; then
+    error "OTEL_OPERATOR_CERT_MANAGER_ENABLED must be 'true' or 'false'"
+fi
+
 echo ""
 
 
