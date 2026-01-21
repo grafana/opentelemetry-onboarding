@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+#### BEGINNING OF BOILERPLATE SCRIPT WAITING TO GET THE GUI
+
 # Load environment variables from .env file if it exists
 [[ -f .env ]] && source .env
 
@@ -46,7 +48,21 @@ export K8S_CLUSTER_NAME=${K8S_CLUSTER_NAME:-my_k8s_cluster}
 read -p "Deployment Environment Name like 'production', 'staging'... (default: 'production'): " DEPLOYMENT_ENVIRONMENT_NAME
 export DEPLOYMENT_ENVIRONMENT_NAME=${DEPLOYMENT_ENVIRONMENT_NAME:-production}
 
+#### BEGINNING OF INSTALLATION SCRIPT
+
+# IN THE GUI, THE USER WOULD HAVE ENTERED THROUGH THE FOLLOWING DATA
+# export GRAFANA_CLOUD_INSTANCE_ID="123456"
+# export GRAFANA_CLOUD_API_KEY="gcp_XXXXXXXXXXXXXXXXXXXX"
+# export GRAFANA_CLOUD_OTLP_ENDPOINT="https://otlp-gateway-prod-eu-west-0.grafana.net/otlp"
+# export K8S_CLUSTER_NAME="my_k8s_cluster"
+# export DEPLOYMENT_ENVIRONMENT_NAME="production"
+# export CERTIFICATE_SOURCE="kube-cert-manager" # options: "kube-cert-manager", "auto-generate"
+
 # WARNING: dont change "namespace=opentelemetry-operator-system" as it is used in the 'instrumentation' CRD defined in values.yaml
+
+# TODO
+# - REQUIRED: Add support for both certificate sources: 1) from Kube Sert Manager, 2) auto generate certs
+# - NICE TO HAVE: Add Kubernetes provider handling in the pipeline to get `k8s.cluster.name`, `host.id`, `cloud.*``, requires user to indicate which provider they are using (EKS, GKE, AKS, etc)
 
 echo "Installing OpenTelemetry Kube Stack Helm Chart..."
 
