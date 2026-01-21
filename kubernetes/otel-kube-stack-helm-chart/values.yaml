@@ -159,17 +159,7 @@ opentelemetry-operator:
     podAnnotations:
       prometheus.io/scrape: "true"
       prometheus.io/port: "8080"
-  admissionWebhooks:
-    certManager:
-      ## @param enabled Enable cert-manager for managing TLS certificates for the admission webhooks
-      ## TODO in production environments, it is strongly recommended to use the cert-manager and overwriting this config to true. See https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#tls-certificate-requirement
-      enabled: false
-    autoGenerateCert:
-      ## @param enabled Enable auto generation of self-signed certificates for the admission webhooks
-      ## TODO disable when using a cert-manager
-      enabled: true
-      ## @param recreate Set to true when autoGenerateCert is enabled to prevent cert trust problems
-      recreate: true 
+
 defaultCRConfig:
   enabled: true
   targetAllocator:
