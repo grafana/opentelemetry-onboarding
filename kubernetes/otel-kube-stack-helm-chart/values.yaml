@@ -123,7 +123,7 @@ instrumentation:
   name: "otel-instrumentation"
   env:
     - name: OTEL_SEMCONV_STABILITY_OPT_IN
-      value: "http,database"
+      value: "http,database,rpc,messaging"
   exporter:
     endpoint: http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318
   resource:
