@@ -11,7 +11,8 @@ receivers:
   # the otelcol-contrib or otel user to the systemd-journal group. The exact
   # user and group might vary depending on your package and linux distribution
   # of choice.
-  # For example: https://github.com/grafana/opentelemetry-onboarding/pull/12
+  # For example:
+  # usermod -aG systemd-journal otelcol-contrib
   journald:
   # Host metrics
   hostmetrics:
@@ -94,7 +95,6 @@ extensions:
       password: "${env:GRAFANA_CLOUD_API_KEY}"
 
 processors:
-  batch:
   memory_limiter:
     check_interval: 5s
     limit_percentage: 80
@@ -103,7 +103,6 @@ processors:
     detectors: [env, system]
   transform/promote_metric_attributes:
     metric_statements:
-      - set(resource.attributes["service.name"],"otelcol/hostmetrics")
       - set(datapoint.attributes["host.name"],resource.attributes["host.name"])
   transform/logs_journald:
     log_statements:
@@ -120,8 +119,8 @@ service:
   extensions: [basicauth/grafana_cloud]
   pipelines:
     traces:
-      receivers: ['otlp']
-      processors: ['resourcedetection','batch']
+      receivers: ["otlp"]
+      processors: ["resourcedetection"]
       exporters:
         - otlphttp/grafana_cloud
         - grafanacloud/connector
@@ -130,11 +129,39 @@ service:
         - otlp
         - grafanacloud/connector
         - hostmetrics
-      processors: ['resourcedetection','transform/promote_metric_attributes','batch']
+      processors: ["resourcedetection", "transform/promote_metric_attributes"]
       exporters:
         - otlphttp/grafana_cloud
+    logs/otlp:
+      receivers: ["otlp"]
+      processors: ["resourcedetection"]
+      exporters:
+        - otlphttp/grafana_cloud
+    logs/journald:
+      receivers: ["journald"]
+      processors: ["resourcedetection", "transform/logs_journald"]
+      exporters:
+        - otlphttp/grafana_cloud
+  telemetry:
+    resource:
+      host.name: "${env:HOSTNAME}"
+    metrics:
+      readers:
+        - periodic:
+            exporter:
+              otlp:
+                protocol: http/protobuf
+                endpoint: "${env:GRAFANA_CLOUD_OTLP_ENDPOINT}/v1/metrics"
+                headers:
+                  - name: "authorization"
+                    value: "${env:GRAFANA_CLOUD_BASIC_AUTH_HEADER}"
     logs:
-      receivers: ['otlp','journald']
-      processors: ['resourcedetection','transform/logs_journald','batch']
-      exporters:
-        - otlphttp/grafana_cloud
+      processors:
+        - batch:
+            exporter:
+              otlp:
+                protocol: http/protobuf
+                endpoint: "${env:GRAFANA_CLOUD_OTLP_ENDPOINT}/v1/logs"
+                headers:
+                  - name: "authorization"
+                    value: "${env:GRAFANA_CLOUD_BASIC_AUTH_HEADER}"
