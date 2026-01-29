@@ -101,7 +101,7 @@ helm repo update
 
 helm upgrade opentelemetry-stack \
     open-telemetry/opentelemetry-kube-stack \
-    --version 0.12.7 \
+    --version 0.13.1 \
     --install \
     --namespace opentelemetry-operator-system \
     --set opentelemetry-operator.admissionWebhooks.certManager.enabled=$OTEL_OPERATOR_CERT_MANAGER_ENABLED \
@@ -109,10 +109,3 @@ helm upgrade opentelemetry-stack \
     --set-string instrumentation.resource.resourceAttributes.deployment\\.environment\\.name=$DEPLOYMENT_ENVIRONMENT_NAME \
     -f https://raw.githubusercontent.com/grafana/opentelemetry-onboarding/refs/heads/main/kubernetes/otel-kube-stack-helm-chart/values.yaml
 
-echo ""
-echo "✓ OpenTelemetry Kube Stack installed successfully!"
-echo ""
-echo "Next steps:"
-echo "  - Send OTLP to: http://opentelemetry-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318 (HTTP/Protobuf)"
-echo "  - Auto-instrument pods by adding this annotation:"
-echo "    instrumentation.opentelemetry.io/inject-<language>: opentelemetry-operator-system/otel-instrumentation"
