@@ -350,8 +350,6 @@ spec:
   securityContext:
     runAsUser: 0
     runAsGroup: 0
-  targetAllocator:
-    enabled: false
   volumeMounts:
   - name: varlogpods
     mountPath: /var/log/pods
