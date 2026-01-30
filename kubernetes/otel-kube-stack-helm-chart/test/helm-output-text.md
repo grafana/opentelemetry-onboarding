@@ -44,7 +44,7 @@ With the features you've enabled, you can:
    `instrumentation.opentelemetry.io/inject-<language>: opentelemetry-operator-system/otel-instrumentation`
    Replace `<language>` with: `dotnet`, `go`, `java`, `nodejs`, `python`, etc.
 
-* **Use manual instrumentation with configurationh injection**:
+* **Use manual instrumentation with configuration injection**:
    Bundle the OTel SDK in your containers, then add this annotation for configuration injection:
    `instrumentation.opentelemetry.io/inject-sdk: opentelemetry-operator-system/otel-instrumentation`
 
