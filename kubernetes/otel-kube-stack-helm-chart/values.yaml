@@ -156,8 +156,3 @@ opentelemetry-operator:
     podAnnotations:
       prometheus.io/scrape: "true"
       prometheus.io/port: "8080"
-
-defaultCRConfig:
-  enabled: true
-  targetAllocator:
-    enabled: false

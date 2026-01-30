@@ -6,8 +6,8 @@ metadata:
   name: opentelemetry-stack-daemon
   namespace: opentelemetry-operator-system
   labels:
-    helm.sh/chart: opentelemetry-kube-stack-0.12.7
-    app.kubernetes.io/version: "0.138.0"
+    helm.sh/chart: opentelemetry-kube-stack-0.13.1
+    app.kubernetes.io/version: "0.141.0"
     app.kubernetes.io/managed-by: Helm
     release: "opentelemetry-stack"        
 spec:
@@ -350,8 +350,6 @@ spec:
   securityContext:
     runAsUser: 0
     runAsGroup: 0
-  targetAllocator:
-    enabled: false
   volumeMounts:
   - name: varlogpods
     mountPath: /var/log/pods
