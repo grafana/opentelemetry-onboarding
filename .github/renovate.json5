@@ -13,4 +13,14 @@
     labels: ["automerge-security-update"],
   },
   osvVulnerabilityAlerts: true,
+  customManagers: [
+    {
+      customType: "regex",
+      description: "Update container images in YAML files",
+      managerFilePatterns: ["/values\\.yaml$/"],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>[a-z-]+?)(?: depName=(?<depName>.+?))?(?: packageName=(?<packageName>.+?))?(?: versioning=(?<versioning>[a-z-]+?))?\\s+.*?image: .+?:(?<currentValue>[^@"\\s]+?)(?:@(?<currentDigest>sha256:[a-f0-9]+))?"?\\s',
+      ],
+    },
+  ],
 }
