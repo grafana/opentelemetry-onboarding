@@ -1,0 +1,30 @@
+name: Check generated examples
+
+on:
+  pull_request:
+    paths:
+      - 'kubernetes/otel-kube-stack-helm-chart/values.yaml'
+      - 'kubernetes/otel-kube-stack-helm-chart/examples/**/values.yaml'
+      - 'kubernetes/otel-kube-stack-helm-chart/Makefile'
+
+jobs:
+  check-examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: jdx/mise-action@v2
+
+      - name: Add Helm repo
+        run: helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+
+      - name: Generate examples
+        run: make generate-examples
+        working-directory: kubernetes/otel-kube-stack-helm-chart
+
+      - name: Check for diff
+        run: |
+          if ! git diff --exit-code; then
+            echo "::error::Rendered examples are out of date. Run 'make generate-examples' and commit the result."
+            exit 1
+          fi
