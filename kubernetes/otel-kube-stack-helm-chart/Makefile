@@ -27,3 +27,10 @@ generate-examples:
 			fi; \
 		done; \
 	done; \
+	echo "Normalizing auto-generated certificate values"; \
+	find $${EXAMPLES_DIR} -name '*.yaml' -exec sed -i \
+		-e 's/\(caBundle:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+		-e 's/\(tls\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+		-e 's/\(tls\.key:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+		-e 's/\(ca\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+		\{\} +
