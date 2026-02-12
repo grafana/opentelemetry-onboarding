@@ -28,9 +28,13 @@ generate-examples:
 		done; \
 	done; \
 	echo "Normalizing auto-generated certificate values"; \
-	find $${EXAMPLES_DIR} -name '*.yaml' -exec sed -i'' \
-		-e 's/\(caBundle:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
-		-e 's/\(tls\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
-		-e 's/\(tls\.key:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
-		-e 's/\(ca\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
-		\{\} +
+	if [ "$$(uname)" = "Darwin" ]; then \
+		find $${EXAMPLES_DIR} -name '*.yaml' -print0 | xargs -0 sed -i '' -e 's/\(caBundle:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' -e 's/\(tls\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' -e 's/\(tls\.key:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' -e 's/\(ca\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/'; \
+	else \
+		find $${EXAMPLES_DIR} -name '*.yaml' -exec sed -i'' \
+			-e 's/\(caBundle:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+			-e 's/\(tls\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+			-e 's/\(tls\.key:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+			-e 's/\(ca\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+			\{\} + ; \
+	fi
