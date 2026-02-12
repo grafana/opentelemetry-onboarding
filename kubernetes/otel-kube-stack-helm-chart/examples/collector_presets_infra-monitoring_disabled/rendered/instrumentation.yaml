@@ -28,11 +28,7 @@ spec:
     env:
     - name: OTEL_INSTRUMENTATION_LOGBACK_APPENDER_EXPERIMENTAL_CAPTURE_KEY_VALUE_PAIR_ATTRIBUTES
       value: "true"
-    - name: OTEL_INSTRUMENTATION_LOGBACK_APPENDER_EXPERIMENTAL_LOG_ATTRIBUTES
-      value: "true"
-    - name: OTEL_INSTRUMENTATION_MICROMETER_BASE_TIME_UNIT
-      value: s
-    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:2.24.0
+    image: us-docker.pkg.dev/grafanalabs-global/docker-grafana-opentelemetry-java-prod/grafana-opentelemetry-java:2.23.1
   nodejs:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs:0.67.2
   python:
