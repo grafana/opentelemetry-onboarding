@@ -101,11 +101,11 @@ helm repo update
 
 helm upgrade opentelemetry-stack \
     open-telemetry/opentelemetry-kube-stack \
-    --version 0.13.1 \
+    --version 0.14.3 \
     --install \
     --namespace opentelemetry-operator-system \
     --set opentelemetry-operator.admissionWebhooks.certManager.enabled=$OTEL_OPERATOR_CERT_MANAGER_ENABLED \
     --set-string clusterName=$K8S_CLUSTER_NAME \
     --set-string instrumentation.resource.resourceAttributes.deployment\\.environment\\.name=$DEPLOYMENT_ENVIRONMENT_NAME \
-    -f https://raw.githubusercontent.com/grafana/opentelemetry-onboarding/refs/heads/main/kubernetes/otel-kube-stack-helm-chart/values.yaml
+    -f values.yaml
 

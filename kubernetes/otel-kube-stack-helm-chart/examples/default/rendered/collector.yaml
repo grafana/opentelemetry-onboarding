@@ -33,14 +33,6 @@ spec:
           username: ${env:GRAFANA_CLOUD_INSTANCE_ID}
       file_storage:
         directory: /var/lib/otelcol
-      k8s_leader_elector/k8s_cluster:
-        auth_type: serviceAccount
-        lease_name: k8s.cluster.receiver.opentelemetry.io
-        lease_namespace: opentelemetry-operator-system
-      k8s_leader_elector/k8s_objects:
-        auth_type: serviceAccount
-        lease_name: k8s.objects.receiver.opentelemetry.io
-        lease_namespace: opentelemetry-operator-system
       k8s_observer:
         auth_type: serviceAccount
         node: ${env:K8S_NODE_NAME}
@@ -133,120 +125,6 @@ spec:
           enabled: true
         start_at: end
         storage: file_storage
-      hostmetrics:
-        collection_interval: 10s
-        root_path: /hostfs
-        scrapers:
-          cpu:
-            metrics:
-              system.cpu.logical.count:
-                enabled: true
-              system.cpu.utilization:
-                enabled: true
-          disk: {}
-          filesystem:
-            exclude_fs_types:
-              fs_types:
-              - autofs
-              - binfmt_misc
-              - bpf
-              - cgroup2
-              - configfs
-              - debugfs
-              - devpts
-              - devtmpfs
-              - fusectl
-              - hugetlbfs
-              - iso9660
-              - mqueue
-              - nsfs
-              - overlay
-              - proc
-              - procfs
-              - pstore
-              - rpc_pipefs
-              - securityfs
-              - selinuxfs
-              - squashfs
-              - sysfs
-              - tracefs
-              match_type: strict
-            exclude_mount_points:
-              match_type: regexp
-              mount_points:
-              - /dev/*
-              - /proc/*
-              - /sys/*
-              - /run/k3s/containerd/*
-              - /var/lib/docker/*
-              - /var/lib/kubelet/*
-              - /snap/*
-            metrics:
-              system.filesystem.utilization:
-                enabled: true
-          load: {}
-          memory:
-            metrics:
-              system.memory.limit:
-                enabled: true
-              system.memory.utilization:
-                enabled: true
-          network: {}
-          paging:
-            metrics:
-              system.paging.usage:
-                enabled: true
-          system:
-            metrics:
-              system.uptime:
-                enabled: true
-      k8s_cluster:
-        allocatable_types_to_report:
-        - cpu
-        - memory
-        - storage
-        auth_type: serviceAccount
-        collection_interval: 10s
-        k8s_leader_elector: k8s_leader_elector/k8s_cluster
-        node_conditions_to_report:
-        - Ready
-        - MemoryPressure
-        - DiskPressure
-        - NetworkUnavailable
-      k8sobjects:
-        k8s_leader_elector: k8s_leader_elector/k8s_objects
-        objects:
-        - exclude_watch_type:
-          - DELETED
-          group: events.k8s.io
-          mode: watch
-          name: events
-      kubeletstats:
-        auth_type: serviceAccount
-        collection_interval: 15s
-        endpoint: https://${env:OTEL_K8S_NODE_IP}:10250
-        extra_metadata_labels:
-        - container.id
-        - k8s.volume.type
-        insecure_skip_verify: true
-        k8s_api_config:
-          auth_type: serviceAccount
-        metric_groups:
-        - node
-        - pod
-        - volume
-        - container
-        metrics:
-          container.cpu.usage:
-            enabled: true
-          k8s.node.cpu.usage:
-            enabled: true
-          k8s.node.uptime:
-            enabled: true
-          k8s.pod.cpu.usage:
-            enabled: true
-          k8s.pod.uptime:
-            enabled: true
       otlp:
         protocols:
           grpc:
@@ -263,8 +141,6 @@ spec:
       - basicauth/grafana_cloud
       - file_storage
       - k8s_observer
-      - k8s_leader_elector/k8s_objects
-      - k8s_leader_elector/k8s_cluster
       pipelines:
         logs:
           exporters:
@@ -277,7 +153,6 @@ spec:
           receivers:
           - otlp
           - filelog
-          - k8sobjects
         metrics:
           exporters:
           - otlphttp/grafana_cloud
@@ -290,9 +165,6 @@ spec:
           - otlp
           - grafanacloud/connector
           - receiver_creator/metrics
-          - hostmetrics
-          - kubeletstats
-          - k8s_cluster
         traces:
           exporters:
           - otlphttp/grafana_cloud
@@ -359,10 +231,6 @@ spec:
     readOnly: true
   - name: varlibotelcol
     mountPath: /var/lib/otelcol
-  - name: hostfs
-    mountPath: /hostfs
-    readOnly: true
-    mountPropagation: HostToContainer
   env:
   - name: K8S_NODE_NAME
     valueFrom:
@@ -425,6 +293,3 @@ spec:
   - name: varlibdockercontainers
     hostPath:
       path: /var/lib/docker/containers
-  - name: hostfs
-    hostPath:
-      path: /

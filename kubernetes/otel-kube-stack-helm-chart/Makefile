@@ -14,7 +14,12 @@ generate-examples:
 		VALUES=$$(find $${EXAMPLES_DIR}/$${example} -name *values.yaml); \
 		rm -rf "$${EXAMPLES_DIR}/$${example}/rendered"; \
 		for value in $${VALUES}; do \
-			helm template opentelemetry-stack open-telemetry/opentelemetry-kube-stack --namespace opentelemetry-operator-system --values ./values.yaml --values $${value} --output-dir "$${EXAMPLES_DIR}/$${example}/rendered"; \
+			helm template opentelemetry-stack \
+				open-telemetry/opentelemetry-kube-stack \
+				--version 0.14.3 \
+				--namespace opentelemetry-operator-system \
+				--values ./values.yaml --values $${value} \
+				--output-dir "$${EXAMPLES_DIR}/$${example}/rendered"; \
 			mv $${EXAMPLES_DIR}/$${example}/rendered/opentelemetry-kube-stack/templates/* "$${EXAMPLES_DIR}/$${example}/rendered"; \
 			SUBCHARTS_DIR=$${EXAMPLES_DIR}/$${example}/rendered/opentelemetry-kube-stack/charts; \
 			if [ -d "$${SUBCHARTS_DIR}" ]; then \
@@ -28,9 +33,13 @@ generate-examples:
 		done; \
 	done; \
 	echo "Normalizing auto-generated certificate values"; \
-	find $${EXAMPLES_DIR} -name '*.yaml' -exec sed -i \
-		-e 's/\(caBundle:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
-		-e 's/\(tls\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
-		-e 's/\(tls\.key:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
-		-e 's/\(ca\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
-		\{\} +
+	if [ "$$(uname)" = "Darwin" ]; then \
+		find $${EXAMPLES_DIR} -name '*.yaml' -print0 | xargs -0 sed -i '' -e 's/\(caBundle:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' -e 's/\(tls\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' -e 's/\(tls\.key:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' -e 's/\(ca\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/'; \
+	else \
+		find $${EXAMPLES_DIR} -name '*.yaml' -exec sed -i'' \
+			-e 's/\(caBundle:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+			-e 's/\(tls\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+			-e 's/\(tls\.key:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+			-e 's/\(ca\.crt:\) [A-Za-z0-9+/=]\{44,\}/\1 AUTO_GENERATED/' \
+			\{\} + ; \
+	fi
