@@ -113,7 +113,7 @@ processors:
 
 connectors:
   grafanacloud/connector:
-    host_identifiers: ["host.id", "k8s.node.uid", "k8s.node.name"]
+    host_identifiers: ["host.id", "k8s.node.uid", "k8s.node.name", "host.name"]
 
 service:
   extensions: [basicauth/grafana_cloud]
