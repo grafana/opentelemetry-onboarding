@@ -120,7 +120,7 @@ service:
   pipelines:
     traces:
       receivers: ["otlp"]
-      processors: ["resourcedetection"]
+      processors: ["memory_limiter", "resourcedetection"]
       exporters:
         - otlphttp/grafana_cloud
         - grafanacloud/connector
@@ -129,17 +129,23 @@ service:
         - otlp
         - grafanacloud/connector
         - hostmetrics
-      processors: ["resourcedetection", "transform/promote_metric_attributes"]
+      processors:
+        [
+          "memory_limiter",
+          "resourcedetection",
+          "transform/promote_metric_attributes",
+        ]
       exporters:
         - otlphttp/grafana_cloud
     logs/otlp:
       receivers: ["otlp"]
-      processors: ["resourcedetection"]
+      processors: ["memory_limiter", resourcedetection"]
       exporters:
         - otlphttp/grafana_cloud
     logs/journald:
       receivers: ["journald"]
-      processors: ["resourcedetection", "transform/logs_journald"]
+      processors:
+        ["memory_limiter", "resourcedetection", "transform/logs_journald"]
       exporters:
         - otlphttp/grafana_cloud
   telemetry:
