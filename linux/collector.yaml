@@ -139,7 +139,7 @@ service:
         - otlphttp/grafana_cloud
     logs/otlp:
       receivers: ["otlp"]
-      processors: ["memory_limiter", resourcedetection"]
+      processors: ["memory_limiter", "resourcedetection"]
       exporters:
         - otlphttp/grafana_cloud
     logs/journald:
