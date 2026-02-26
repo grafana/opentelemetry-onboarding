@@ -149,8 +149,9 @@ instrumentation:
 opentelemetry-operator:
   manager:
     collectorImage:
-      repository: otel/opentelemetry-collector-contrib
-      tag: "0.144.0"
+      # WARNING config doesn't support setting required `command/name: bin/otelcol`
+      repository: grafana/alloy-dev
+      tag: "v1.13.2-devel-5bf4dcf"
     podAnnotations:
       prometheus.io/scrape: "true"
       prometheus.io/port: "8080"
