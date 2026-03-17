@@ -16,7 +16,7 @@ generate-examples:
 		for value in $${VALUES}; do \
 			helm template opentelemetry-stack \
 				open-telemetry/opentelemetry-kube-stack \
-				--version 0.14.3 \
+				--version 0.14.6 \
 				--namespace opentelemetry-operator-system \
 				--values ./values.yaml --values $${value} \
 				--output-dir "$${EXAMPLES_DIR}/$${example}/rendered"; \

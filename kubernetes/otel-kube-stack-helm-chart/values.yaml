@@ -150,7 +150,7 @@ opentelemetry-operator:
   manager:
     collectorImage:
       repository: otel/opentelemetry-collector-contrib
-      tag: "0.144.0"
+      tag: "0.147.0"
     podAnnotations:
       prometheus.io/scrape: "true"
       prometheus.io/port: "8080"
