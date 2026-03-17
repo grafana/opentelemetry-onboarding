@@ -5,6 +5,7 @@
   dependencyDashboard: true,
   platformCommit: "enabled",
   automerge: true,
+  prCreation: "immediate",
   ignorePaths: [],
   ignorePresets: [":ignoreModulesAndTests"],
   ignoreUnstable: true,
