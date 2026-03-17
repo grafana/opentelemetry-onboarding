@@ -4,7 +4,7 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   labels:
-    helm.sh/chart: opentelemetry-operator-0.105.0
+    helm.sh/chart: opentelemetry-operator-0.105.1
     app.kubernetes.io/name: opentelemetry-operator
     app.kubernetes.io/version: "0.144.0"
     app.kubernetes.io/managed-by: Helm
@@ -90,7 +90,7 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   labels:
-    helm.sh/chart: opentelemetry-operator-0.105.0
+    helm.sh/chart: opentelemetry-operator-0.105.1
     app.kubernetes.io/name: opentelemetry-operator
     app.kubernetes.io/version: "0.144.0"
     app.kubernetes.io/managed-by: Helm
@@ -209,7 +209,7 @@ metadata:
     helm.sh/hook: pre-install,pre-upgrade
     helm.sh/hook-delete-policy: before-hook-creation
   labels:
-    helm.sh/chart: opentelemetry-operator-0.105.0
+    helm.sh/chart: opentelemetry-operator-0.105.1
     app.kubernetes.io/name: opentelemetry-operator
     app.kubernetes.io/version: "0.144.0"
     app.kubernetes.io/managed-by: Helm
