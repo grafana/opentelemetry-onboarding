@@ -1,0 +1,37 @@
+name: Update generated examples
+
+on:
+  push:
+    branches:
+      - 'grafanarenovatebot/**'
+    paths:
+      - 'kubernetes/otel-kube-stack-helm-chart/values.yaml'
+
+jobs:
+  update-examples:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.ref }}
+
+      - uses: jdx/mise-action@c1ecc8f748cd28cdeabf76dab3cccde4ce692fe4 # v4.0.0
+
+      - name: Add Helm repo
+        run: helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+
+      - name: Generate examples
+        run: make generate-examples
+        working-directory: kubernetes/otel-kube-stack-helm-chart
+
+      - name: Commit updated examples
+        run: |
+          if ! git diff --exit-code --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add kubernetes/otel-kube-stack-helm-chart/examples/
+            git commit -m "chore: regenerate rendered examples"
+            git push
+          fi
