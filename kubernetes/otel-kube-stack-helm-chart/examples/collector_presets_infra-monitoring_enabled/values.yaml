@@ -1,0 +1,14 @@
+clusterName: a_k8s_cluster
+collectors:
+  daemon:
+    presets:
+      hostMetrics:
+        enabled: true
+      kubeletMetrics:
+        enabled: true
+      kubernetesEvents:
+        enabled: true
+      clusterMetrics:
+        enabled: true
+      
+      
