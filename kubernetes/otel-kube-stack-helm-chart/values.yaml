@@ -133,16 +133,16 @@ instrumentation:
     type: parentbased_always_on
   java:
     # renovate: datasource=docker depName=grafana-opentelemetry-java packageName=us-docker.pkg.dev/grafanalabs-global/docker-grafana-opentelemetry-java-prod/grafana-opentelemetry-java
-    image: us-docker.pkg.dev/grafanalabs-global/docker-grafana-opentelemetry-java-prod/grafana-opentelemetry-java:2.23.1
+    image: us-docker.pkg.dev/grafanalabs-global/docker-grafana-opentelemetry-java-prod/grafana-opentelemetry-java:2.26.1
     env:
     - name: OTEL_INSTRUMENTATION_LOGBACK_APPENDER_EXPERIMENTAL_CAPTURE_KEY_VALUE_PAIR_ATTRIBUTES
       value: "true"
   nodejs:
     # renovate: datasource=docker depName=autoinstrumentation-nodejs packageName=ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs
-    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs:0.67.2
+    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs:0.71.0
   dotnet:
     # renovate: datasource=docker depName=autoinstrumentation-dotnet packageName=ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-dotnet
-    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-dotnet:1.13.0
+    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-dotnet:1.14.1
   python:
     # renovate: datasource=docker depName=autoinstrumentation-python packageName=ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-python
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-python:0.60b1
@@ -150,7 +150,7 @@ opentelemetry-operator:
   manager:
     collectorImage:
       repository: otel/opentelemetry-collector-contrib
-      tag: "0.147.0"
+      tag: "0.148.0"
     podAnnotations:
       prometheus.io/scrape: "true"
       prometheus.io/port: "8080"
