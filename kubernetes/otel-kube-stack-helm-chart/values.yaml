@@ -51,9 +51,6 @@ collectors:
         metrics:
           enabled: true
     config:
-      connectors:
-        grafanacloud/connector:
-          host_identifiers: ["host.id", "k8s.node.uid", "k8s.node.name"]
       extensions:
         basicauth/grafana_cloud:
           client_auth:
@@ -70,11 +67,9 @@ collectors:
           traces:
             exporters:
               - otlphttp/grafana_cloud
-              - grafanacloud/connector
           metrics:
             receivers:
               - otlp
-              - grafanacloud/connector
             exporters:
               - otlphttp/grafana_cloud
           logs:
