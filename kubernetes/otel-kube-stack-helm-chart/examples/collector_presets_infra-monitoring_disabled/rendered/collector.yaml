@@ -14,12 +14,6 @@ spec:
   managementState: managed
   mode: daemonset
   config:
-    connectors:
-      grafanacloud/connector:
-        host_identifiers:
-        - host.id
-        - k8s.node.uid
-        - k8s.node.name
     exporters:
       debug: {}
       otlphttp/grafana_cloud:
@@ -163,12 +157,10 @@ spec:
           - batch
           receivers:
           - otlp
-          - grafanacloud/connector
           - receiver_creator/metrics
         traces:
           exporters:
           - otlphttp/grafana_cloud
-          - grafanacloud/connector
           processors:
           - k8sattributes
           - resourcedetection/env

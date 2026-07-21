@@ -101,6 +101,12 @@ processors:
     spike_limit_percentage: 25
   resourcedetection:
     detectors: [env, system]
+    system:
+      resource_attributes:
+        host.id:
+          enabled: true
+        host.name:
+          enabled: true
   transform/promote_metric_attributes:
     metric_statements:
       - set(datapoint.attributes["host.name"],resource.attributes["host.name"])
@@ -111,10 +117,6 @@ processors:
       - set(resource.attributes["service.name"],log.attributes["_SYSTEMD_UNIT"])
       - delete_key(log.attributes,"MESSAGE")
 
-connectors:
-  grafanacloud/connector:
-    host_identifiers: ["host.id", "k8s.node.uid", "k8s.node.name", "host.name"]
-
 service:
   extensions: [basicauth/grafana_cloud]
   pipelines:
@@ -123,11 +125,9 @@ service:
       processors: ["memory_limiter", "resourcedetection"]
       exporters:
         - otlphttp/grafana_cloud
-        - grafanacloud/connector
     metrics:
       receivers:
         - otlp
-        - grafanacloud/connector
         - hostmetrics
       processors:
         [
