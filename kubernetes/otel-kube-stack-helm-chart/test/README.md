@@ -4,7 +4,7 @@ d
 ### Pre-requisites
 
 * Either
- * A Kubernetes cluster (:warning: Docker Desktop Kubernetes is OT supported as it breaks with OtelCol hostmetrics & pod logs)
+ * A Kubernetes cluster (:warning: Docker Desktop Kubernetes is NOT supported as it breaks with OtelCol hostmetrics & pod logs)
  * Docker on which we will install a [k3d Kubernetes cluster](https://k3d.io/stable/)
     * [k3d](https://k3d.io/stable/)
 
