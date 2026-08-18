@@ -48,3 +48,4 @@ image: <full-registry-path>:<version>
 ```
 
 The Java autoinstrumentation image uses the Grafana distribution (`us-docker.pkg.dev/grafanalabs-global/docker-grafana-opentelemetry-java-prod/grafana-opentelemetry-java`) rather than the upstream OpenTelemetry image.
+- Security issues should be reported via [Grafana's security issue reporting page](https://grafana.com/legal/report-a-security-issue/) and not directly in this repository.
