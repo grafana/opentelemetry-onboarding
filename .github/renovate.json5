@@ -4,7 +4,9 @@
     'config:recommended',
   ],
   branchPrefix: 'grafanarenovatebot/',
-  dependencyDashboard: true,
+  dependencyDashboard: {
+    enabled: true,
+  },
   platformCommit: 'enabled',
   automerge: true,
   prCreation: 'immediate',
