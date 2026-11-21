@@ -17,7 +17,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - uses: jdx/mise-action@c1ecc8f748cd28cdeabf76dab3cccde4ce692fe4 # v4.0.0
+      - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
 
       - name: Add Helm repo
         run: helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
